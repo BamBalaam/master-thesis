@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  latex:
+    image: dxjoke/tectonic-docker:latest
+    volumes:
+      - "./latex_sources/${FLAVOUR}/:/usr/src/tex"
+    command: "tectonic /usr/src/tex/${FILENAME}"
