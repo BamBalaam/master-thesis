@@ -2,7 +2,9 @@ version: '3'
 
 services:
   latex:
-    image: dxjoke/tectonic-docker:latest
+    build:
+      context: .
     volumes:
-      - "./latex_sources/${FLAVOUR}/:/usr/src/tex"
+      - "./latex_sources/${FLAVOUR}:/usr/src/tex"
+      - "./latex_sources/common:/usr/src/tex/common"
     command: "tectonic /usr/src/tex/${FILENAME}"

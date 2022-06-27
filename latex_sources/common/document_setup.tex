@@ -1,0 +1,40 @@
+\documentclass[12pt,oneside]{memoir}
+\usepackage[
+    top=2.5cm, bottom=2.5cm, left=3.5cm, right=2.5cm,
+    marginparwidth=0cm
+]{geometry}
+\renewcommand{\baselinestretch}{1.5}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf[RH]{\thepage}
+\fancyfoot{}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{-10pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{-15pt}{0pt}
+\assignpagestyle{\chapter}{fancy}
+
+
+\pagenumbering{gobble}
+\usepackage{multicol}
+\counterwithout{figure}{chapter}
+\counterwithin*{equation}{section}
+\usepackage{textcomp}
+\raggedbottom
+
+\renewcommand*{\cftchapterfont}{\normalfont}
+\usepackage[font=small,labelsep=period,labelfont=bf]{caption}
+
+\usepackage{fontspec}
+\linespread{1.5}
+
+\renewcommand{\footnoterule}{\noindent\smash{\rule[3pt]{\textwidth}{0.4pt}}}
+
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{amsmath}
