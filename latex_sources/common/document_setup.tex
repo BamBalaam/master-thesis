@@ -1,3 +1,4 @@
+% Document format
 \documentclass[12pt,oneside]{memoir}
 \usepackage[
     top=2.5cm, bottom=2.5cm, left=3.5cm, right=2.5cm,
@@ -10,14 +11,6 @@
 \fancyhf[RH]{\thepage}
 \fancyfoot{}
 
-\usepackage{titlesec}
-\titleformat{\chapter}[display]
-{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{-10pt}{\Huge}
-\titlespacing*{\chapter}{0pt}{-15pt}{0pt}
-\assignpagestyle{\chapter}{fancy}
-
-
-\pagenumbering{gobble}
 \usepackage{multicol}
 \counterwithout{figure}{chapter}
 \counterwithin*{equation}{section}
@@ -25,12 +18,12 @@
 \raggedbottom
 
 \renewcommand*{\cftchapterfont}{\normalfont}
+\setsecnumdepth{subsection}
+
 \usepackage[font=small,labelsep=period,labelfont=bf]{caption}
 
 \usepackage{fontspec}
 \linespread{1.5}
-
-\renewcommand{\footnoterule}{\noindent\smash{\rule[3pt]{\textwidth}{0.4pt}}}
 
 \usepackage{enumitem}
 \usepackage{indentfirst}
@@ -38,3 +31,33 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{amsmath}
+\usepackage[bottom]{footmisc}
+
+% Chapter title formatting
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{-10pt}{\Large}
+\titlespacing*{\chapter}{0pt}{-15pt}{0pt}
+\assignpagestyle{\chapter}{fancy}
+
+% Bibliography
+\usepackage[
+    backend=bibtex, style=authortitle, defernumbers=true,
+]{biblatex}
+\addbibresource{common/bibliography.bib}
+
+% For each cited reference create a category named "cited"
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+% Add rule for annotated bibliography
+\DeclareFieldFormat{annotation}{
+    \\ \indent{\textbf{Annotation:}\addspace #1}\\
+}
+
+\renewbibmacro*{finentry}{%
+  \iffieldundef{annotation}
+    {\finentry}
+    {\setunit{\finentrypunct\par\vspace{\bibitemsep}\nobreak}
+     \printfield{annotation}%
+     \finentry}}

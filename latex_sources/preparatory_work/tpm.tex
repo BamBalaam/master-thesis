@@ -1,6 +1,7 @@
 \include{common/document_setup}
 
 \begin{document}
+\pagenumbering{gobble}
 
 \input{common/cover_page}
 
@@ -11,7 +12,6 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 
 \vfill
 
-
 \begin{center}
 \Large Année académique 2021--2022
 \end{center}
@@ -19,18 +19,36 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \end{titlingpage}
 
 \newpage
-\begin{KeepFromToc}
-\tableofcontents
-\end{KeepFromToc}
+\newgeometry{left=2.5cm, top=0.5cm, bottom=1cm}
+\vspace{-1cm}
+\setcounter{tocdepth}{3}
+\tableofcontents*
+\vspace{-1cm}
+\listoffigures*
+\restoregeometry
 \newpage
+
 \pagenumbering{arabic}
+\input{sections/intro}
+\input{sections/suggested_toc}
+\input{sections/work_plan}
 
-\chapter{Introduction}
+% Bibliography
 
-Preparatory work
-
-%\nocite{*}
-%\bibliographystyle{annotate}
-%\bibliography{common/bibliography.bib}
+\nocite{*}
+\renewcommand{\bibname}{Annotated Bibliography}
+\printbibheading
+\printbibliography[
+    category=cited,
+    heading=subbibliography,
+    title={Cited in the introduction draft},
+    resetnumbers
+]
+\printbibliography[
+    notcategory=cited,
+    heading=subbibliography,
+    title={Further reading for the thesis},
+    resetnumbers
+]
 
 \end{document}
