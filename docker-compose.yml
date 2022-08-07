@@ -5,6 +5,6 @@ services:
     build:
       context: .
     volumes:
-      - "./latex_sources/${FLAVOUR}:/usr/src/tex"
-      - "./latex_sources/common:/usr/src/tex/common"
+      - "./${FLAVOUR}:/usr/src/tex"
+      - "./common:/usr/src/tex/common"
     command: "tectonic /usr/src/tex/${FILENAME}"
