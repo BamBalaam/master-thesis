@@ -6,6 +6,9 @@
 ]{biblatex}
 \addbibresource{common/bibliography.bib}
 
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
 \begin{document}
 \pagenumbering{gobble}
 
@@ -25,14 +28,22 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \end{titlingpage}
 
 \newpage
-\begin{KeepFromToc}
-\tableofcontents
-\end{KeepFromToc}
+\newgeometry{left=2.5cm, top=0.5cm, bottom=1cm}
+\vspace{-1cm}
+\setcounter{tocdepth}{3}
+\tableofcontents*
+\vspace{-1cm}
+\listoffigures*
+\restoregeometry
 \newpage
+
 \pagenumbering{arabic}
+\input{sections/intro}
 
-\chapter{Introduction}
-
-Thesis
+% Bibliography
+\printbibliography[
+    category=cited,
+    resetnumbers
+]
 
 \end{document}
