@@ -1,5 +1,27 @@
 \include{common/document_setup}
 
+% Bibliography
+\usepackage[
+    backend=bibtex, style=authortitle, defernumbers=true,
+]{biblatex}
+\addbibresource{common/bibliography.bib}
+
+% For each cited reference create a category named "cited"
+\DeclareBibliographyCategory{cited}
+\AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+% Add rule for annotated bibliography
+\DeclareFieldFormat{annotation}{
+    \\ \indent{\textbf{Annotation:}\addspace #1}\\
+}
+
+\renewbibmacro*{finentry}{%
+  \iffieldundef{annotation}
+    {\finentry}
+    {\setunit{\finentrypunct\par\vspace{\bibitemsep}\nobreak}
+     \printfield{annotation}%
+     \finentry}}
+
 \begin{document}
 \pagenumbering{gobble}
 

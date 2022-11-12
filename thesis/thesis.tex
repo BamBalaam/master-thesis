@@ -1,6 +1,13 @@
 \include{common/document_setup}
 
+% Bibliography
+\usepackage[
+    backend=bibtex, style=authortitle, defernumbers=true,
+]{biblatex}
+\addbibresource{common/bibliography.bib}
+
 \begin{document}
+\pagenumbering{gobble}
 
 \input{common/cover_page}
 
