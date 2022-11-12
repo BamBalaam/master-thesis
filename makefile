@@ -1,3 +1,5 @@
+.PHONY: main tpm thesis
+
 main:
 	@echo "Specify a flavour (tpm/thesis)"
 tpm:
