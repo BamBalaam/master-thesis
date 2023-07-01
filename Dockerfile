@@ -1,3 +1,5 @@
 FROM dxjoke/tectonic-docker:latest
 
-RUN mkdir /usr/src/tex/common
+ARG FLAVOUR
+
+COPY ./$FLAVOUR /usr/src/tex
