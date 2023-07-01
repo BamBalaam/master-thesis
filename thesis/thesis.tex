@@ -9,6 +9,34 @@
 \DeclareBibliographyCategory{cited}
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
 
+\usepackage{listings}
+\usepackage{color}
+\definecolor{darkred}{rgb}{0.6,0.0,0.0}
+\definecolor{darkgreen}{rgb}{0,0.50,0}
+\definecolor{lightblue}{rgb}{0.0,0.42,0.91}
+\definecolor{orange}{rgb}{0.99,0.48,0.13}
+\definecolor{grass}{rgb}{0.18,0.80,0.18}
+\definecolor{pink}{rgb}{0.97,0.15,0.45}
+\lstdefinestyle{colored}{ %
+  basicstyle=\ttfamily,
+  backgroundcolor=\color{white},
+  commentstyle=\color{green}\itshape,
+  keywordstyle=\color{blue}\bfseries\itshape,
+  stringstyle=\color{red},
+}
+\lstset{
+  aboveskip=1em,
+  breaklines=true,
+  abovecaptionskip=-6pt,
+  captionpos=b,
+  escapeinside={\%*}{*)},
+  frame=single,
+  numbers=left,
+  numbersep=15pt,
+  numberstyle=\tiny,
+  style=colored
+}
+
 \begin{document}
 \pagenumbering{gobble}
 
@@ -32,13 +60,17 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \vspace{-1cm}
 \setcounter{tocdepth}{3}
 \tableofcontents*
-\vspace{-1cm}
+\newpage
 \listoffigures*
 \restoregeometry
 \newpage
 
 \pagenumbering{arabic}
-\input{sections/intro}
+\input{sections/1-intro}
+\input{sections/2-state_of_the_art}
+\input{sections/3-lojban_grammar}
+\input{sections/4-parsing_lojban}
+\input{sections/5-deducing_meaning}
 
 % Bibliography
 \printbibliography[
