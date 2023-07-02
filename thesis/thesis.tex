@@ -53,11 +53,18 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \newpage
 
 \pagenumbering{arabic}
+
+% Chapters
 \input{sections/1-intro}
 \input{sections/2-state_of_the_art}
 \input{sections/3-lojban_grammar}
 \input{sections/4-parsing_lojban}
 \input{sections/5-deducing_meaning}
+
+% Appendices
+\appendix
+\renewcommand{\appendixname}{Appendix}
+\input{sections/A-code}
 
 % Bibliography
 \printbibliography[

@@ -17,4 +17,4 @@ build_docker_thesis:
 	docker build . --tag tectonic-docker-build --build-arg FLAVOUR=thesis
 
 run_docker_thesis:
-	docker run -v ./thesis:/usr/src/tex/ tectonic-docker-build tectonic /usr/src/tex/thesis.tex
+	docker run -v ./thesis:/usr/src/tex/ -v ./code:/usr/src/tex/code tectonic-docker-build tectonic /usr/src/tex/thesis.tex
