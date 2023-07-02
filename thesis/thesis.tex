@@ -2,12 +2,14 @@
 
 % Bibliography
 \usepackage[
-    backend=bibtex, style=authortitle, defernumbers=true,
+    backend=bibtex, style=authortitle, defernumbers=true, backref=true, block=none, hyperref=true
 ]{biblatex}
 \addbibresource{bibliography.bib}
 
 \DeclareBibliographyCategory{cited}
 \AtEveryCitekey{\addtocategory{cited}{\thefield{entrykey}}}
+
+\setlength\bibitemsep{2\itemsep}
 
 \begin{document}
 \pagenumbering{gobble}
@@ -93,13 +95,14 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \pagenumbering{gobble}
 \part{Bibliography}
 \pagenumbering{arabic}
-\pagestyle{empty}
+\pagestyle{fancy}
+\newgeometry{left=2cm}
 \printbibliography[
     category=cited,
-    heading=none,
     resetnumbers
 ]
 
+\pagestyle{empty}
 \newpage \ \newpage % Blank page after bibliography
 
 \end{document}
