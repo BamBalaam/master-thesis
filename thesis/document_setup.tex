@@ -1,5 +1,5 @@
 % Document format
-\documentclass[12pt,oneside]{memoir}
+\documentclass[12pt,twoside]{memoir}
 \usepackage[
     top=2.5cm, bottom=2.5cm, left=3.5cm, right=2.5cm,
     marginparwidth=0cm
@@ -41,8 +41,13 @@
 \assignpagestyle{\chapter}{fancy}
 
 % Appendix title formatting in ToC
-
 \renewcommand*{\cftappendixname}{Appendix\space}
+
+% Part title formatting in ToC
+\setlength\cftpartnumwidth{2.5em}
+
+% Other package imports
+\usepackage{epigraph}
 
 % Listings
 \usepackage{listings}

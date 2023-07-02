@@ -42,19 +42,33 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 
 \end{titlingpage}
 
+\pagestyle{empty}
+
+% Quote
+\renewcommand{\epigraphsize}{\large}
+\renewcommand{\epigraphwidth}{7cm}
+\epigraph{“Dude, suckin’ at something is the first step to being sorta good at something.”}{\textit{Jake the Dog}}
+
 \newpage
-\newgeometry{left=2.5cm, top=0.5cm, bottom=1cm}
+
+% ToC and LoF
+\pagenumbering{roman}
+%\newgeometry{left=2.5cm, top=2cm, bottom=1cm}
 \vspace{-1cm}
 \setcounter{tocdepth}{3}
-\tableofcontents*
+\tableofcontents
 \newpage
-\listoffigures*
-\restoregeometry
-\newpage
+\listoffigures
+\newpage \ \newpage % Blank page after toc/lof
 
+% Thesis
+\pagenumbering{gobble}
+\makeatletter
+\@openrightfalse
+\makeatother
+\part{Thesis}
 \pagenumbering{arabic}
-
-% Chapters
+\pagestyle{fancy}
 \input{sections/1-intro}
 \input{sections/2-state_of_the_art}
 \input{sections/3-lojban_grammar}
@@ -62,14 +76,30 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \input{sections/5-deducing_meaning}
 
 % Appendices
+\newpage \ \newpage % Blank page after chapters
+\newpage \ \newpage % Blank page after chapters
+\pagenumbering{gobble}
+\makeatletter
+\@openrightfalse
+\makeatother
+\part{Appendices}
+\pagenumbering{arabic}
 \appendix
 \renewcommand{\appendixname}{Appendix}
 \input{sections/A-code}
+\newpage
 
 % Bibliography
+\pagenumbering{gobble}
+\part{Bibliography}
+\pagenumbering{arabic}
+\pagestyle{empty}
 \printbibliography[
     category=cited,
+    heading=none,
     resetnumbers
 ]
+
+\newpage \ \newpage % Blank page after bibliography
 
 \end{document}
