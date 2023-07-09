@@ -1,5 +1,5 @@
 % Document format
-\documentclass[12pt,twoside]{memoir}
+\documentclass[12pt,oneside]{memoir}
 \usepackage[
     top=2.5cm, bottom=2.5cm, left=3.5cm, right=2.5cm,
     marginparwidth=0cm
@@ -66,14 +66,16 @@
   stringstyle=\color{red},
 }
 \lstset{
+  abovecaptionskip=-6pt,
   aboveskip=1em,
   breaklines=true,
-  abovecaptionskip=-6pt,
   captionpos=b,
   escapeinside={\%*}{*)},
   frame=single,
   numbers=left,
   numbersep=15pt,
   numberstyle=\tiny,
-  style=colored
+  style=colored,
+  tabsize=2,
+  title=\lstname
 }

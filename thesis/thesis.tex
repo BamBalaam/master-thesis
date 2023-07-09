@@ -77,8 +77,8 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \input{sections/1-intro}
 \input{sections/2-state_of_the_art}
 \input{sections/3-lojban_grammar}
-\input{sections/4-parsing_lojban}
-\input{sections/5-deducing_meaning}
+\input{sections/4-deducing_meaning}
+\input{sections/5-conclusion}
 
 % Appendices
 \newpage \ \newpage % Blank page after chapters
@@ -91,10 +91,12 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \pagenumbering{arabic}
 \appendix
 \renewcommand{\appendixname}{Appendix}
+\newgeometry{left=1.5cm, right=1cm, top=2cm, bottom=1.5cm}
 \input{sections/A-code}
 \newpage
 
 % Bibliography
+\nocite{*}
 \pagenumbering{gobble}
 \part{Bibliography}
 \pagenumbering{arabic}
@@ -102,6 +104,15 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \newgeometry{left=2cm}
 \printbibliography[
     category=cited,
+    heading=subbibliography,
+    title={Bibliography},
+    resetnumbers
+]
+\newpage
+\printbibliography[
+    notcategory=cited,
+    heading=subbibliography,
+    title={Not cited yet},
     resetnumbers
 ]
 
