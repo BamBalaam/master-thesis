@@ -36,9 +36,8 @@
 % Chapter title formatting
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{-10pt}{\Large}
+{\normalfont\Huge\bfseries}{\thechapter}{-10pt}{\LARGE}
 \titlespacing*{\chapter}{0pt}{-15pt}{0pt}
-\assignpagestyle{\chapter}{fancy}
 
 % Appendix title formatting in ToC
 \renewcommand*{\cftappendixname}{Appendix\space}
@@ -48,6 +47,7 @@
 
 % Other package imports
 \usepackage{epigraph}
+\usepackage{nonumonpart}
 
 % Listings
 \usepackage{listings}

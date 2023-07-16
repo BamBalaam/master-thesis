@@ -45,6 +45,7 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \end{titlingpage}
 
 \pagestyle{empty}
+\newpage \ \newpage % Blank page after title page
 
 % Quote
 \renewcommand{\epigraphsize}{\large}
@@ -67,12 +68,11 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \newpage \ \newpage % Blank page after toc/lof
 
 % Thesis
-\pagenumbering{gobble}
+\pagenumbering{arabic}
 \makeatletter
 \@openrightfalse
 \makeatother
 \part{Thesis}
-\pagenumbering{arabic}
 \pagestyle{fancy}
 \input{sections/1-intro}
 \input{sections/2-state_of_the_art}
@@ -80,32 +80,20 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \input{sections/4-deducing_meaning}
 \input{sections/5-conclusion}
 
-% Appendices
-\newpage \ \newpage % Blank page after chapters
-\newpage \ \newpage % Blank page after chapters
-\pagenumbering{gobble}
-\makeatletter
-\@openrightfalse
-\makeatother
-\part{Appendices}
-\pagenumbering{arabic}
-\appendix
-\renewcommand{\appendixname}{Appendix}
-\newgeometry{left=1.5cm, right=1cm, top=2cm, bottom=1.5cm}
-\input{sections/A-code}
-\newpage
+\newpage \ \newpage % Blank page after thesis
 
 % Bibliography
 \nocite{*}
-\pagenumbering{gobble}
+\makeatletter
+\@openrightfalse
+\makeatother
 \part{Bibliography}
-\pagenumbering{arabic}
 \pagestyle{fancy}
 \newgeometry{left=2cm}
 \printbibliography[
     category=cited,
     heading=subbibliography,
-    title={Bibliography},
+    %title={Bibliography},
     resetnumbers
 ]
 \newpage
@@ -116,7 +104,15 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
     resetnumbers
 ]
 
+% Appendices
+\makeatletter
+\@openrightfalse
+\makeatother
 \pagestyle{empty}
-\newpage \ \newpage % Blank page after bibliography
+\part{Appendices}
+\appendix
+\newgeometry{left=1.5cm, right=1cm, top=2cm, bottom=1.5cm}
+\input{sections/A-code}
+\newpage
 
 \end{document}
