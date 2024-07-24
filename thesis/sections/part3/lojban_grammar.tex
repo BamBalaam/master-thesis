@@ -1,0 +1,68 @@
+\chapter{Writing a Lojban Parser}
+
+\section{Introduction}
+
+As seen in REF HERE, the existing formal grammars for Lojban are extremely complete. They cover the entirety of the language, both in its morphology and syntax/semantics, which means they can even validate words that don't exist yet. However, this completion makes these formal grammars extremely complex to read for a beginner. \\
+
+For any other language, using a formal grammar file as a learning companion would be a very obscure method. However, Lojban being a language that can be parsed just as a programming language would, it would be very interesting to build a formal grammar file which would help a prospective student understand the intrinsic rules behind the language's grammar. \\
+
+Of course, improving the reading comprehension of the formal grammar file reduces the complete aspect of it:
+
+\begin{itemize}
+  \item It is almost impossible to address all rules of the grammar;
+  \item Ignoring the morphology of words means that unknown but valid words won't be parsable;
+\end{itemize}
+
+This chapter will explore the main reference for Lojban (\cite{cowan1997complete}), in its 2016 revised version, and write a simplified parser for a subset of the language.
+
+\newpage
+
+\section{Preparatory work}
+
+\section{Parsing Lojban sentences}
+\label{sec:parsing_lojban_sentences}
+
+\subsection{CFG}
+\label{sub:cfg}
+
+(See Appendix \ref{appendix:peg-annex} for the corresponding annex)
+
+PEG
+
+Format: Extended Backus-Naur form
+
+https://pypi.org/project/parsimonious/
+
+https://github.com/erikrose/parsimonious
+
+
+\subsection{Parser}
+\label{sub:parser}
+
+(See Appendix \ref{appendix:gentufa-annex} for the corresponding annex)
+
+This code is a Python script that defines a class called Gentufa, which is used for parsing sentences using a context-free grammar defined in a file named "gerna.peg". The script utilizes the parsimonious library for parsing.
+
+Importing required modules:
+
+The code imports the necessary modules from the Python standard library (os, re, and sys), as well as the Grammar class from the parsimonious.grammar module, and a custom module called Jbovlaste from the package dictionary.jbovlaste.
+
+Define Gentufa class:
+
+This class represents a sentence parser and has the following methods:
+
+    \_\_init\_\_(self): The constructor method initializes the parser by loading the dictionary data using the Jbovlaste class, reading the grammar file "gerna.peg", and augmenting the grammar text with dictionary words.
+
+    get\_parsed\_sentence(self, sentence): This method parses the given sentence using the grammar and returns the parsed result.
+
+Initialization of Gentufa class:
+
+In the constructor, the script first creates an instance of the Jbovlaste class and retrieves the entire dictionary data using get\_whole\_dict() method. Then, it reads the content of the "gerna.peg" grammar file and augments the grammar text by replacing certain tags (enclosed in double curly braces) with the corresponding words from the dictionary. The Grammar object is created using the augmented grammar text and stored in the self.grammar attribute.
+
+Parsing a sentence:
+
+The get\_parsed\_sentence method takes a sentence as input, appends " EOL" (end of line) to it, and then uses the parse() method of the Grammar object to parse the sentence according to the defined grammar.
+
+Command-line interface:
+
+If the script is executed directly (not imported as a module), the code checks if exactly one argument (sentence to parse) is provided when running the script from the command line. If not, it prints a usage message and exits with an error code. Otherwise, it creates an instance of the Gentufa class, parses the provided sentence using the get\_parsed\_sentence() method, and prints the parsed result.

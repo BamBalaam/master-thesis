@@ -1,0 +1,87 @@
+\chapter{Creating a ready to use dictionary (``Jbovlaste'')}
+\label{sub:creating_a_dictionary}
+
+Described in \ref{sec:dictionary}, La Jbovlaste is one of the Lojban dictionaries available on the internet.
+This dictionary allows to export the entirety of its data in a XML format (on \cite{jbovlaste} - "XML Export" page).\\
+
+\newpage
+
+The format of the XML file is as follows (showing the example of a single word, jbovlaste itself): \\
+
+\begin{lstlisting}
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="jbovlaste.xsl"?>
+<dictionary>
+  <direction from="lojban" to="English">
+    (...)
+    <valsi word="jbovlaste" type="lujvo">
+      <user>
+        <username>djeikyb</username>
+        <realname>Jacob Thomas Errington</realname>
+      </user>
+      <definition>$x_1=li_1$ is a list of words $x_2=v_1$ in Lojban ($v_3$=lo lojbo), in order $x_3=li_3$, preserved in medium $x_4=li_4$.</definition>
+      <definitionid>32240</definitionid>
+      <notes>In a la-description, jbovlaste refers to the online dictionary editing system.</notes>
+      <glossword word="dictionary" sense="lojban word list" />
+    </valsi>
+    (...)
+  </direction>
+</dictionary>
+\end{lstlisting}
+
+\newpage
+
+The code produced is as followed:
+
+\lstinputlisting[language=Python]{./code/dictionary/jbovlaste.py}
+
+Example of usage:
+
+\begin{lstlisting}
+>>> from dictionary.jbovlaste import Jbovlaste
+>>> jbovlaste = Jbovlaste()
+>>> for key, values in jbovlaste.get_whole_dict().items():
+...     print(key, len(values))
+...
+cmavo 598
+cmavo-compound 607
+fu'ivla 3901
+experimental cmavo 856
+cmevla 481
+obsolete fu'ivla 302
+bu-letteral 36
+zei-lujvo 147
+lujvo 7388
+experimental gismu 306
+gismu 1342
+obsolete cmevla 28
+obsolete cmavo 2
+obsolete zei-lujvo 3
+>>>
+\end{lstlisting}
+
+This code defines a Python class called Jbovlaste, which is responsible for parsing words from the Jbovlaste, the official dictionary for the constructed language Lojban. The Jbovlaste class can retrieve information about words in the dictionary, including their type, definition, and optional glossary words in the target language (default is English).
+
+Here's a breakdown of the code:
+
+    Import necessary modules:
+        re: Regular expression module for pattern matching.
+        sys: Provides access to some variables used or maintained by the interpreter and functions that interact strongly with the interpreter.
+
+    The Jbovlaste class is defined to handle parsing and retrieving information from the Jbovlaste dictionary.
+
+    The class constructor \_\_init\_\_(self, language="en") is defined. It takes an optional argument language (default is "en" for English), and it initializes the \_dictionary attribute as an empty dictionary. It then reads the XML file corresponding to the specified language and populates the \_dictionary with information about words, their types, definitions, and glossary words.
+
+    The get\_whole\_dict(self) method returns the entire dictionary containing all parsed words and their details.
+
+    The get\_word\_struct(self, word) method takes a word as input and returns its structure (type, definition, and glossary words) from the dictionary. If the word is not found in the dictionary, it raises an exception.
+
+    The get\_word\_pretty(self, word) method takes a word as input and returns a formatted string with the word's details, including its type, definition, and glossary words (if any). It internally calls the get\_word\_struct() method.
+
+    The decompose\_definition(self, definition) method takes a definition as input and decomposes it to find special arguments enclosed within "\$" signs. It returns a dictionary containing the original definition, the number of arguments found, and a list of arguments.
+
+    The get\_definition\_object(self, word) method takes a word as input and returns a list of definition objects. Each definition object contains the original definition and the arguments (if any) found using the decompose\_definition() method.
+
+    The \_\_name\_\_ == "\_\_main\_\_" block is used to check if the script is being run directly and not imported as a module. It allows the script to be executed from the command line. The script expects a single argument (a word) to be passed when executed, and it uses the Jbovlaste class to retrieve information about the specified word and prints the result.
+
+Overall, this code serves as a basic command-line interface to interact with the Jbovlaste dictionary for Lojban words, allowing users to look up words and retrieve their definitions and glossary words.

@@ -39,7 +39,7 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \vfill
 
 \begin{center}
-\Large Année académique 2022--2023
+\Large Année académique 2023--2024
 \end{center}
 
 \end{titlingpage}
@@ -47,19 +47,23 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \pagestyle{empty}
 \newpage \ \newpage % Blank page after title page
 
+\input{resume}
+
+\newpage \ \newpage
+
 % Quote
-%\renewcommand{\epigraphsize}{\large}
-%\renewcommand{\epigraphwidth}{10cm}
-%\vspace{3cm}
-%\epigraph{``Education is that which remains, if one has forgotten everything he learned in school.''}{\textit{Albert Einstein} - Ideas and Opinions, p. 63}
+\renewcommand{\epigraphsize}{\large}
+\renewcommand{\epigraphwidth}{10cm}
+\vspace{3cm}
+\epigraph{``Education is that which remains, if one has forgotten everything he learned in school.''}{\textit{Albert Einstein} - Ideas and Opinions, p. 63}
 %\vspace{2cm}
 %\epigraph{``Dude, suckin’ at something is the first step towards being sorta' good at something.''}{\textit{Jake the Dog} - Adventure Time, S1E25}
 
-\input{resume}
+\newpage \ \newpage
 
-\newpage
+Acknowledgements
 
-%\newpage
+\newpage \ \newpage
 
 % ToC and LoF
 \pagenumbering{roman}
@@ -67,7 +71,7 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \vspace{-1cm}
 \setcounter{tocdepth}{3}
 \tableofcontents
-\newpage
+\newpage \ \newpage
 \listoffigures
 \newpage \ \newpage % Blank page after toc/lof
 
@@ -76,13 +80,24 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \makeatletter
 \@openrightfalse
 \makeatother
-\part{Thesis}
 \pagestyle{fancy}
-\input{sections/1-intro}
-\input{sections/2-state_of_the_art}
-\input{sections/3-lojban_grammar}
-\input{sections/4-deducing_meaning}
-\input{sections/5-conclusion}
+% Part 1
+\part{Introduction}
+\input{sections/part1/context}
+\input{sections/part1/state_of_the_art}
+% Part 2
+\part{Creating a Python-Lojban toolkit}
+\input{sections/part2/dictionary}
+% Part 3
+\part{Creating a simplified PEG for Lojban}
+\input{sections/part3/lojban_grammar}
+% Part 4
+\part{Bringing both creations together}
+\input{sections/part4/visualising}
+\input{sections/part4/coverage}
+% Part 5
+\part{Conclusion}
+\input{sections/part5/conclusion}
 
 \newpage \ \newpage % Blank page after thesis
 
@@ -108,6 +123,8 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
     resetnumbers
 ]
 
+\newpage \ \newpage % Blank page after thesis
+
 % Appendices
 \makeatletter
 \@openrightfalse
@@ -116,7 +133,8 @@ en vue de l'obtention du titre de Master en Sciences et Technologies de l'Inform
 \part{Appendices}
 \appendix
 \newgeometry{left=1.5cm, right=1cm, top=2cm, bottom=1.5cm}
-\input{sections/A-code}
-\newpage
+\input{sections/code_appendix}
+
+\newpage \ \newpage
 
 \end{document}

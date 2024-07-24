@@ -14,6 +14,6 @@ Grade: 15/20
 
 ## Thesis
 
-Academic Year: 2022-2023
+Academic Year: 2023-2024
 
 Grade: Thesis Ongoing - No grade yet
