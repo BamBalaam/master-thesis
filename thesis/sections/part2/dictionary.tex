@@ -1,4 +1,7 @@
-\chapter{Creating a ready to use dictionary (``Jbovlaste'')}
+\chapter{The ``dictionary'' module}
+
+\section{Methodology}
+
 \label{sub:creating_a_dictionary}
 
 Described in \ref{sec:dictionary}, La Jbovlaste is one of the Lojban dictionaries available on the internet.
@@ -31,6 +34,8 @@ The format of the XML file is as follows (showing the example of a single word, 
 
 \newpage
 
+\section{Code produced}
+
 The code produced is as followed:
 
 \lstinputlisting[language=Python]{./code/dictionary/jbovlaste.py}
@@ -59,6 +64,8 @@ obsolete cmavo 2
 obsolete zei-lujvo 3
 >>>
 \end{lstlisting}
+
+\section{Breakdown of the code}
 
 This code defines a Python class called Jbovlaste, which is responsible for parsing words from the Jbovlaste, the official dictionary for the constructed language Lojban. The Jbovlaste class can retrieve information about words in the dictionary, including their type, definition, and optional glossary words in the target language (default is English).
 
