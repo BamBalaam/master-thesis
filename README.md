@@ -17,3 +17,7 @@ Grade: 15/20
 Academic Year: 2023-2024
 
 Grade: Thesis Ongoing - No grade yet
+
+## Code
+
+This thesis has a code companion repo, found here as a submodule in the `code` folder, or at https://github.com/BamBalaam/lojban-toolkit
