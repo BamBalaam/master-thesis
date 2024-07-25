@@ -1,3 +1,3 @@
 [submodule "code"]
 	path = code
-	url = git@github.com:BamBalaam/lojban.git
+	url = git@github.com:BamBalaam/lojban-toolkit.git
