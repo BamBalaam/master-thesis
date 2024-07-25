@@ -1,4 +1,4 @@
-\chapter{The ``grammar_parser'' module}
+\chapter{The ``grammar\_parser'' module}
 
 \section{Methodology}
 
@@ -7,32 +7,8 @@
 
 Described in Subsection \ref{sub:parser}.
 
-\lstinputlisting[language=Python]{./code/parser/gentufa.py}
+\lstinputlisting[language=Python]{./code/grammar_parser/gentufa.py}
 
 (See Appendix \ref{appendix:gentufa-annex} for the corresponding annex)
 
-This code is a Python script that defines a class called Gentufa, which is used for parsing sentences using a context-free grammar defined in a file named "gerna.peg". The script utilizes the parsimonious library for parsing.
-
-Importing required modules:
-
-The code imports the necessary modules from the Python standard library (os, re, and sys), as well as the Grammar class from the parsimonious.grammar module, and a custom module called Jbovlaste from the package dictionary.jbovlaste.
-
-Define Gentufa class:
-
-This class represents a sentence parser and has the following methods:
-
-    \_\_init\_\_(self): The constructor method initializes the parser by loading the dictionary data using the Jbovlaste class, reading the grammar file "gerna.peg", and augmenting the grammar text with dictionary words.
-
-    get\_parsed\_sentence(self, sentence): This method parses the given sentence using the grammar and returns the parsed result.
-
-Initialization of Gentufa class:
-
-In the constructor, the script first creates an instance of the Jbovlaste class and retrieves the entire dictionary data using get\_whole\_dict() method. Then, it reads the content of the "gerna.peg" grammar file and augments the grammar text by replacing certain tags (enclosed in double curly braces) with the corresponding words from the dictionary. The Grammar object is created using the augmented grammar text and stored in the self.grammar attribute.
-
-Parsing a sentence:
-
-The get\_parsed\_sentence method takes a sentence as input, appends " EOL" (end of line) to it, and then uses the parse() method of the Grammar object to parse the sentence according to the defined grammar.
-
-Command-line interface:
-
-If the script is executed directly (not imported as a module), the code checks if exactly one argument (sentence to parse) is provided when running the script from the command line. If not, it prints a usage message and exits with an error code. Otherwise, it creates an instance of the Gentufa class, parses the provided sentence using the get\_parsed\_sentence() method, and prints the parsed result.
+TODO
