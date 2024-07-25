@@ -10,13 +10,9 @@
 
 Academic Year: 2021-2022
 
-Grade: 15/20
-
 ## Thesis
 
-Academic Year: 2023-2024
-
-Grade: Thesis Ongoing - No grade yet
+Academic Year: 2023-2024 (Ongoing)
 
 ## Code
 
