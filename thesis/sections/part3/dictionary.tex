@@ -1,11 +1,10 @@
 \chapter{The ``dictionary'' module}
+\label{chap:creating_a_dictionary}
 
 \section{Methodology}
 
-\label{sub:creating_a_dictionary}
-
-Described in \ref{sec:dictionary}, La Jbovlaste is one of the Lojban dictionaries available on the internet.
-This dictionary allows to export the entirety of its data in a XML format (on \cite{jbovlaste} - "XML Export" page).\\
+Described in \ref{sec:dictionary}, La Jbovlaste is the official Lojban dictionary published by the LLG and available online \footnote{\cite{jbovlaste}}.
+This dictionary allows to export the entirety of its data in a XML format at the "XML Export" page \footnote{\cite{jbovlaste-export}}.\\
 
 \newpage
 
@@ -32,39 +31,31 @@ The format of the XML file is as follows (showing the example of a single word, 
 </dictionary>
 \end{lstlisting}
 
-\newpage
-
-\section{Code produced}
-
-The code produced is as followed:
-
-\lstinputlisting[language=Python]{./code/dictionary/jbovlaste.py}
-
-Example of usage:
+\section{Examples of usage}
 
 \begin{lstlisting}
->>> from dictionary.jbovlaste import Jbovlaste
->>> jbovlaste = Jbovlaste()
->>> for key, values in jbovlaste.get_whole_dict().items():
-...     print(key, len(values))
-...
-cmavo 598
-cmavo-compound 607
-fu'ivla 3901
-experimental cmavo 856
-cmevla 481
-obsolete fu'ivla 302
-bu-letteral 36
-zei-lujvo 147
-lujvo 7388
-experimental gismu 306
-gismu 1342
-obsolete cmevla 28
-obsolete cmavo 2
-obsolete zei-lujvo 3
->>>
-\end{lstlisting}
+  >>> from dictionary.jbovlaste import Jbovlaste
+  >>> jbovlaste = Jbovlaste()
+  >>> for key, values in jbovlaste.get_whole_dict().items():
+  ...     print(key, len(values))
+  ...
+  cmavo 598
+  cmavo-compound 607
+  fu'ivla 3901
+  experimental cmavo 856
+  cmevla 481
+  obsolete fu'ivla 302
+  bu-letteral 36
+  zei-lujvo 147
+  lujvo 7388
+  experimental gismu 306
+  gismu 1342
+  obsolete cmevla 28
+  obsolete cmavo 2
+  obsolete zei-lujvo 3
+  >>>
+  \end{lstlisting}
 
-\section{Breakdown of the code}
+\section{Breakdown of the code produced}
 
-TODO
+The code produced is found at Annex \ref{appendix:jbovlaste-annex}

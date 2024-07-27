@@ -21,7 +21,7 @@ medium allowing researchers in the fields of science, philosophy and others to c
 
 \begin{quote}
     ``(...) And we understand further, that it is the use of China and the kingdoms of the High Levant to write in characters real, which express neither letters nor words in gross, but
-    things or notions; insomuch as countries and provinces which understand not one another’s language can nevertheless read one another’s writings, because the characters are accepted
+    things or notions; insomuch as countries and provinces which understand not one another's language can nevertheless read one another's writings, because the characters are accepted
     more generally than the languages do extend; and, therefore, they have a vast multitude of characters, as many, I suppose, as radical words.''
     \footnote{\cite{bacon1605proficience} (the position of the quote depends on the various editions and publishing formats of the book, but most commonly found in Book II, Chapter XVI)}
 \end{quote}
@@ -64,15 +64,16 @@ Constructed languages are usually divided into three groups, based on their purp
 
 \textbf{Auxiliary languages}: this group of languages aims to serve as a secondary language for people all around the world to communicate seamlessly.
 They serve as a sort of ``lingua franca'', but without the usual factor of dominance associated to them (socio-economic or political). Some of them have a secondary social aim:
-bridge cultures and countries in order to bring peace to the world. Notable examples of languages in this category are Esperanto, Volapük, Ido, and Interlingua.\newline
+bridge cultures and countries in order to bring peace to the world. Notable examples of languages in this category are Esperanto, Volapük, Ido, and Interlingua.
 
 \textbf{Artistic languages}: group of languages designed as artistic projects, or ways to expand works of fiction and give them more depth. Notable examples of languages
 in this category come from many different mediums, such as books (Sindarin and Quenya --- Lord of the Rings, Newspeak --- Nineteen Eighty-Four, and  Nadsat --- A Clockwork Orange),
-TV shows (Klingon --- Star Trek, Valyrian and Dothraki --- Game of Thrones, and Goa'uld --- Stargate) or even comic books (Syldavian --- Tintin).\newline
+TV shows (Klingon --- Star Trek, Valyrian and Dothraki --- Game of Thrones, and Goa'uld --- Stargate) or even comic books (Syldavian --- Tintin).
 
 \textbf{Engineered languages}: languages created in order to explore theories in the field of linguistics. Notable examples of languages in this category are Loglan, Lojban, and Toki Pona\newline
 
-A second method of classification for constructed languages was devised in 1903 by Louis Couturat and Léopold Leau in ``Histoire de la langue universelle'':
+A second method of classification for constructed languages was devised in 1903 by Louis Couturat and Léopold Leau
+in ``Histoire de la langue universelle''\footnote{\cite[Introduction, Pages XXVII and XXVIII]{couturat1903histoire}}:
 
 \begin{itemize}
     \setlength\itemsep{-0.5em}
@@ -80,7 +81,7 @@ A second method of classification for constructed languages was devised in 1903 
     or a taxonomy for words and concepts;
     \item A posteriori system: language whose features are based in one or several existing languages --- many of which are often criticized for being ethnocentric, and
     creating auxiliary languages that draw inspiration from mostly European countries, which defeats the purpose of an all encompassing world-wide language;
-    \item Mixed system: when the language has features that fall into both systems. \footnote{\cite[Introduction, Pages XXVII and XXVIII]{couturat1903histoire}}
+    \item Mixed system: when the language has features that fall into both systems.
 \end{itemize}
 
 All these classifications are of course loose definitions: a language may fall under more than one category in terms of purpose, for example. For an in-depth history of
@@ -139,30 +140,54 @@ in order to make it easier to learn by humans and more readily accessible. This 
 John Woldemar Conwan \footnote{\cite{cowan1997complete}}, an American programmer otherwise known for his work with XML and Unicode, among other things. This book is,
 still today, considered the baseline of the language, defining its whole grammar, vocabulary, and semantics.\newline
 
-Over the years, Brown disputed several times in court that this creation infringed his copyright. Several trials later, all courts agree that both projects are independent,
-and Lojban took over Loglan in popularity and contributors.\\
+Over the years, Brown disputed several times in court that this creation infringed his copyright. Several trials later, all courts agree that both projects
+are independent, and Lojban took over Loglan in popularity and contributors.\\
 
 Lojban claims to be a syntactically unambiguous language that improves human-human communication but also human-computer
-communication. While the former is more complicated to prove, since the amount of speakers of Lojban around the world is not immense, the latter has been studied. Research has already
-postulated that Lojban (or variants of it) would be interesting interlinguas between humans and computers \footnote{\cite{speer2004meeting}} or artificial
-intelligences \footnote{\cite{goertzel2013lojban}}.
+communication. While the former is more complicated to prove, since the amount of speakers of Lojban around the world is not immense,
+the latter has been studied. Research has already postulated that Lojban (or variants of it) would be interesting interlinguas between
+humans and computers \footnote{\cite{speer2004meeting}} or artificial intelligences \footnote{\cite{goertzel2013lojban}}.
+
+\subsection{(Very) Brief introduction to the Lojban grammar}
+
+Lojban sentences are constructed in a way that expresses a logical predicate, with a fixed set of arguments. For a small
+refresher course in predicate logic see Annex A. The recurring ``first approach to the language'' example used in most Lojban
+literature, from the language standard to research papers is the sentence ``John is the father of Sam''. In this sentence, there
+is a clear predicate (``is-the-father-of'') and two arguments (``John'' and ``Sam'').
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.20]{images/lojban_grammar.png}
+\caption{Basic structure of a Lojban sentence (Source: \cite{cowan1997complete})}
+\end{figure}
+
+This figure presents the three most important base elements of a sentence in Lojban:
+
+\begin{itemize}
+    \item \textbf{bridi}: the predicate expression;
+    \item \textbf{selbri}: the word(s) acting as the predicate;
+    \item \textbf{sumti}: positional argument passed to the predicate.
+\end{itemize}
+
+Selbri are strictly defined by representations which position the sumti around a key word. For example, the selbri to describe the fatherhood relationship is ``patfu'':
+
+$$\text{patfu}: x_1 \: \text{is a father of} \: x_2$$
+
+Thus, the above sentence is expressed in Lojban as: \textbf{la .djon. patfu la .sam.} \newline
+
+If no modifiers are used, the position of the sumti is rigid and allows to release the sentence from any ambiguity. We always know who is the father and who is the child.
+Of course, in this example, the English counterpart doesn't really make sense (the sentence ``Sam is `fathered' by John'' makes absolutely no sense), but for a non-native speaker
+the order of words in other pairs of sentences might add ambiguity. For example, a non-native might get confused about the difference between the sentences
+``My dog bites the man'' (\textbf{``le mi gerku cu batci le nanmu''} in Lojban) and ``The man is being bitten by my dog'', as this inverted construct might not exist in their language.
+Lojban solves this issue by having a specific keyword, indicating that two or more sumti (positional arguments) are going to be swapped. This allows speakers, even those not
+familiar with this grammatical construct, to understand the difference between two very different sentence constructions: e.g. ``The man is being bitten by my dog''
+and ``The man is biting my dog''.\newline
+
+Of course, this framework of predicate expressions is simply the base feature of the language, but many others allow it to cover the other missing aspects that most natural
+languages feature: tenses, relative clauses, abstractions, emotional indicators, and many others. These will be explored in a further chapter of the thesis. \newline
 
 \subsection{Learning Lojban}
 
 TODO
 
-\section{Aims and objectives of this thesis}
-
-At its root, computer science had a singular aim --- automating calculations for a broad spectrum of use-cases. However with time and with the emergence of better, faster, and
-stronger computers, researchers understood that computers could be used to achieve far more complex tasks. Several diverse research fields made their appearance, and among these
-some realised that computing could help us structure the flow of information, in addition to making calculations based on it. \newline
-
-The explosion of tasks requiring the processing of large amounts of structured data inside of companies, and much later the arrival of the Internet, forced us to debate and
-research subjects such as: how to gather information, how to manage and store it, analyse and interpret it, explore it, etc... A sizeable chunk of this information comes to us
-in the form of text and language, in their many forms. To answer these needs, language engineering became a central research field in a new society, one that had migrated
-from a purely industrial society to an ``information society''.\newline
-
-The main aim of this thesis is to explore the intersection between the two fields presented in this introduction: linguistics, around the subject of a particular constructed
-language, and computer science, which allows language processing. The first objective of this thesis is to outline the state of the art and existing parsers for Lojban, list both
-their flaws and positive aspects, and define what kind of new parser would be interesting to develop. Using the Python programming language, a set of tools will be created in order to
-parse and visualise the structure of given sentences, in order to analyse them.\newline
+Vaguely: it's super complicated, many advanced references (namely THE book),
