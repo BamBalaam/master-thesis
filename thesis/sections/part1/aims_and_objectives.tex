@@ -10,20 +10,19 @@ forced us to debate and research subjects such as: how to gather information, ho
 A sizeable chunk of this information comes to us in the form of text and language, in their many forms. To answer these needs, language engineering became a
 central research field in a new society, one that had migrated from a purely industrial society to an ``information society''.\newline
 
-The main aim of this thesis is to explore the intersection between the two fields presented in this introduction: linguistics, around the subject of a
-particular constructed language, and computer science, which allows language processing. The first objective of this thesis is to outline the state of the
-art and existing parsers for Lojban, list both their flaws and positive aspects, and define what kind of new parser would be interesting to develop.
-Using the Python programming language, a set of tools will be created in order to parse and visualise the structure of given sentences, in order to analyse them.\newline
+This thesis aims to accompany the reader through the exploration of the intersection between two fields: linguistics (constructed languages)
+and computer science (language processing, parsing expression grammars, and others). Lojban, being a language purely based in logic, seems like a very
+interesting candidate to help us through this exploration. \newline
 
-As seen in REF HERE, the existing formal grammars for Lojban are extremely complete. They cover the entirety of the language, both in its morphology and syntax/semantics, which means they can even validate words that don't exist yet. However, this completion makes these formal grammars extremely complex to read for a beginner. \\
+Unfortunately, as seen in REF, Lojban is not an easy language to learn. What if we had a set of tools which helped us understand Lojban's grammar,
+through analysis of its grammar and visualisation of parsed sentences? This thesis aims to create such a set of tools.\newline
 
-For any other language, using a formal grammar file as a learning companion would be a very obscure method. However, Lojban being a language that can be parsed just as a programming language would, it would be very interesting to build a formal grammar file which would help a prospective student understand the intrinsic rules behind the language's grammar. \\
-
-Of course, improving the reading comprehension of the formal grammar file reduces the complete aspect of it:
-
+To do so, some objectives are needed. They are the following:
 \begin{itemize}
-  \item It is almost impossible to address all rules of the grammar;
-  \item Ignoring the morphology of words means that unknown but valid words won't be parsable;
+\item Outline the state of the art and existing tools/resources for Lojban (Part \ref{part:state-of-the-art})
+\item Create a simplified Parsing Expression Grammar (PEG) for Lojban, which allows the reader to learn the basics of Lojban's grammar
+while reading a set of parsing expressions (Part \ref{part:creating-a-peg})
+\item Create tools, written in the Python programming language, that utilise this PEG to explore Lojban sentences and help learners of this
+language to understand how it is structured (Part \ref{part:python-toolkit})
+\item Examine if these objectives were met, and outline future work (Part \ref{part:conclusion})
 \end{itemize}
-
-This chapter will explore the main reference for Lojban (\cite{cowan1997complete}), in its 2016 revised version, and write a simplified parser for a subset of the language.

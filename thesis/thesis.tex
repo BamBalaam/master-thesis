@@ -53,24 +53,29 @@
 \pagestyle{fancy}
 % Part 1
 \part{Introduction}
+\label{part:introduction}
 \input{sections/part1/context}
-\input{sections/part1/state_of_the_art}
 \input{sections/part1/aims_and_objectives}
 % Part 2
-\part{Creating a Python-Lojban toolkit}
-\input{sections/part2/code_intro}
-\input{sections/part2/dictionary}
-\input{sections/part2/parser}
+\part{State of the art}
+\label{part:state-of-the-art}
+\input{sections/part2/state_of_the_art}
 % Part 3
 \part{Creating an ``educational'' PEG for Lojban}
+\label{part:creating-a-peg}
 \input{sections/part3/introduction}
 \input{sections/part3/peg}
 % Part 4
-\part{Bringing both creations together}
+\part{Creating a Python-Lojban toolkit}
+\label{part:python-toolkit}
+\input{sections/part4/code_intro}
+\input{sections/part4/dictionary}
+\input{sections/part4/parser}
 \input{sections/part4/visitor}
 \input{sections/part4/visualising}
 % Part 5
 \part{Conclusion}
+\label{part:conclusion}
 \input{sections/part5/future_work}
 \input{sections/part5/conclusion}
 
@@ -79,7 +84,8 @@
 \makeatletter
 \@openrightfalse
 \makeatother
-\part{Bibliography}
+\part*{Bibliography}
+\addcontentsline{toc}{part}{Bibliography}
 \pagestyle{fancy}
 \newgeometry{left=2cm}
 \printbibliography[
@@ -101,7 +107,8 @@
 \@openrightfalse
 \makeatother
 \pagestyle{empty}
-\part{Appendices}
+\part*{Appendices}
+\addcontentsline{toc}{part}{Appendices}
 \appendix
 \newgeometry{left=1.8cm, right=0.5cm, top=1.5cm, bottom=1.5cm}
 \input{sections/code_appendix}
