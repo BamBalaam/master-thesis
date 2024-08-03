@@ -3,19 +3,10 @@
 \vspace{0.5cm}
 
 As we enter the more "technical" aspect of this thesis, a brief introduction is necessary. This part of the thesis
-(and Part \ref{part:visitor-and-visualising}) will present several Python "modules". Each one of them builds upon the previous one to
+will present several Python "modules". Each one of them builds upon the previous one to
 add more functionality, but all are layers can be run as-is, not only the last one.\newline
 
-The following diagram explains how these modules interact with each other:\newline
-
-\begin{figure}[H]
-%\centering
-\hspace{-1.5cm}
-\includegraphics[scale=0.43]{images/module_dependency.png}
-\caption{Dependency between the created Python modules}
-\end{figure}
-
-The modules are the following: \newline
+The modules are:
 
 \begin{itemize}
 \item The \textbf{"dictionary"} module: Described in Chapter \ref{chap:creating_a_dictionary},
@@ -24,10 +15,16 @@ this module allows to get definitions for Lojban words, as well as some structur
 a Lojban sentence to check its validity, and returns its Parsing Tree;
 \item The \textbf{"visitor"} module: Described in Chapter \ref{chap:visitor-module}, this module goes through
 a sentence's Parsing Tree and highlights nodes of relevance, in order to tag parts of speech or assign a semantic role
-to words in a sentence;
-\item The \textbf{"visualize"} module: Described in Chapter \ref{chap:visualize-module}, this module takes the
-representation of the sentence created by the previous module and displays it in a more visual and interactive way.
+to words in a sentence, in order to visualise the constituting parts of a sentence and their role in it;
 \end{itemize}
+
+The following diagram explains how these modules interact with each other:\newline
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.43]{images/module_dependency.png}
+\caption{Dependency between the created Python modules}
+\end{figure}
 
 Additionally a \textbf{"tests"} folder, described in Chapter \ref{chap:creating_a_test_suite}, contains code to
 test the validity of the Parsing Expression Grammar created in Part \ref{part:creating-a-peg} of the thesis, by
