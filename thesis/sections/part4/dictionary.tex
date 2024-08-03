@@ -3,7 +3,7 @@
 
 \section{Methodology}
 
-Described in \ref{sec:dictionary}, La Jbovlaste is the official Lojban dictionary published by the LLG and available online \footcite{jbovlaste}.
+Described in Chapter \ref{chap:existing-resources-and-tools}, La Jbovlaste is the official Lojban dictionary published by the LLG and available online \footcite{jbovlaste}.
 This dictionary allows to export the entirety of its data in a XML format at the "XML Export" page \footcite{jbovlaste-export}.
 The format of the XML file is as follows (showing the example of a single word, jbovlaste itself):
 
@@ -25,18 +25,49 @@ The format of the XML file is as follows (showing the example of a single word, 
 
 For our first module in the Python-Lojban toolkit, a Python class is created in order to parse this XML file and aggregate all words present,
 their type, and their definition. Once that dictionary is composed, functions of this class will allow to get word definitions (in a raw or "prettified"
-format for displaying on a terminal) and objects used in further modules.
+format for displaying on a terminal) or Python objects used in other modules.
+
+\section{Breakdown of the code in the module}
+
+The code produced is found at Annex \ref{appendix:jbovlaste-annex}.
+
+\subsection*{README.md file}
+
+Allows users to understand what the module does and how it is used.
+Also includes a citation to where the raw XML file used comes from.
+
+\subsection*{\_\_init\_\_.py file}
+
+Allows other modules to import the Jbovlaste class without calling the file it is contained in explicitly.
+
+\subsection*{jbovlaste.py file}
+
+This file defines the Jbovlaste class which, once instantiated, allows to fetch
+words in Lojban through helper functions. The structure returned contains the type of word it is,
+a definition, and optional glossary words in the language of the dictionary.
+As of right now, only English is available as a target language but making other
+languages available is fairly trivial (although other languages are not as complete
+in the official "La Jbovlaste").\newline
+
+\newpage
+
+The following list is a brief description of all the
+functions in the class:
+
+\begin{itemize}
+\item \textbf{\_\_init\_\_ :}
+\item \textbf{get\_whole\_dict :}
+\item \textbf{get\_word\_struct :}
+\item \textbf{get\_word\_pretty :}
+\item \textbf{decompose\_definition:}
+\item \textbf{get\_definition\_arguments :}
+\end{itemize}
+
+\newpage
 
 \section{Examples of usage}
 
-This module can be used in two different ways: as a class for short scripts or other modules to use, or as a command-line interface (CLI) tool.
-
-\begin{lstlisting}[language=Python, caption=Jbovlaste class being used by a Python script]
->>> from dictionary import Jbovlaste
->>> jbovlaste_instance = Jbovlaste()
->>> jbovlaste_instance.get_word_struct("blanu")
-{'definition': '$x_{1}$ is blue [color adjective].', 'glosswords': [{'word': 'blue', 'sense': None}], 'type': 'gismu'}
-\end{lstlisting}
+This module can be used in two different ways: as a command-line interface (CLI) tool, or as a class for short scripts or other modules to use.
 
 \begin{lstlisting}[caption=Jbovlaste module being used as a command-line interface tool]
 $ python3 dictionary/jbovlaste.py "blanu"
@@ -49,17 +80,9 @@ Glossary Words:
         - blue
 \end{lstlisting}
 
-\section{Breakdown of the module}
-
-The code produced is found at Annex \ref{appendix:jbovlaste-annex}.
-
-\subsection*{README.md file}
-
-TEST TEST TEST
-
-\subsection*{\_\_init\_\_.py file}
-
-Allows other modules to import the Jbovlaste class without calling the file it is contained in explicitly.
-
-\subsection*{jbovlaste.py file}
-
+\begin{lstlisting}[language=Python, caption=Jbovlaste class being used by a Python script]
+>>> from dictionary import Jbovlaste
+>>> jbovlaste_instance = Jbovlaste()
+>>> jbovlaste_instance.get_word_struct("blanu")
+{'definition': '$x_{1}$ is blue [color adjective].', 'glosswords': [{'word': 'blue', 'sense': None}], 'type': 'gismu'}
+\end{lstlisting}
