@@ -23,9 +23,9 @@ The format of the XML file is as follows (showing the example of a single word, 
 </dictionary>
 \end{lstlisting}
 
-For our first module in the Python-Lojban toolkit, a Python class is created in order to parse this XML file and aggregate all words present,
-their type, and their definition. Once that dictionary is composed, functions of this class will allow to get word definitions (in a raw or "prettified"
-format for displaying on a terminal) or Python objects used in other modules.
+In this first module in the Python-Lojban toolkit, a Python class is created in order to parse this XML file and aggregate all words present,
+their type, and their definition. Once that dictionary is instantiated, functions of this class will allow to get word definitions
+(in a raw or "prettified" format for displaying on a terminal) or Python objects used in other modules.
 
 \section{Breakdown of the code in the module}
 
@@ -55,19 +55,37 @@ The following list is a brief description of all the
 functions in the class:
 
 \begin{itemize}
-\item \textbf{\_\_init\_\_ :}
-\item \textbf{get\_whole\_dict :}
-\item \textbf{get\_word\_struct :}
-\item \textbf{get\_word\_pretty :}
-\item \textbf{decompose\_definition:}
-\item \textbf{get\_definition\_arguments :}
+\item \textbf{\_\_init\_\_}: instantiates the class object by building a dictionary of
+Lojban words stored in a Python "dict" data type:
+  \begin{itemize}
+    \item opens the XML file and finds all nodes named "valsi" ("word" in Lojban);
+    \item constructs the dictionary by classifying words by their type, and adds
+    each word into a sub-dictionary of that word type;
+    \item extracts from each word its definition and some "glosswords".
+  \end{itemize}
+\item \textbf{get\_whole\_dict}: returns the entire Python "dict" data type that stores
+the words.
+\item \textbf{get\_word\_struct}: tries to find a word, given as a parameter of the function,
+in the dictionary; if found, returns an object with all known information about it;
+if not found, returns a KeyError (one of Python's default errors).
+\item \textbf{get\_word\_pretty}: gathers the object returned by get\_word\_struct and returns
+a formatted string with the information contained within to be displayed.
+\item \textbf{decompose\_definition} and \textbf{get\_definition\_arguments}: uses a Regular Expression
+in order to extract and list arguments ("sumti") from a definition
+\footnote{See \ref{subsec:brief-intro-to-lojban} for a reminder on the meaning of "sumti"}.
 \end{itemize}
+
+Outside of the class, we can find an "if-clause".
+This is the entrypoint of the file if it is executed directly through a terminal.
+In that case, the Jbovlaste class is instantiated and the "get\_word\_pretty" function
+is executed, with whatever word was given as an argument in the call.
 
 \newpage
 
 \section{Examples of usage}
 
-This module can be used in two different ways: as a command-line interface (CLI) tool, or as a class for short scripts or other modules to use.
+This module can be used in two different ways: as a command-line interface (CLI) tool
+from a terminal, or as a class for short scripts or other modules to use.
 
 \begin{lstlisting}[caption=Jbovlaste module being used as a command-line interface tool]
 $ python3 dictionary/jbovlaste.py "blanu"
