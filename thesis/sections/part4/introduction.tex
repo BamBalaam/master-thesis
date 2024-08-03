@@ -5,11 +5,24 @@
 As seen in Chapter \ref{chap:existing-resources-and-tools}, the existing formal grammars for Lojban are extremely complete.
 They cover the entirety of the language, both in its morphology and syntax/semantics, which means they can even validate words that don't exist yet
 as long as they fit the language's rules (as mentioned in \ref{subsec:brief-intro-to-lojban}, an algorithm for "word creation" exists).
-However, this completion makes these formal grammars extremely complex to read for a beginner, and are simply tools to be used by machines. \newline
+However, this completion makes these formal grammars extremely complex to read for a beginner, and are simply tools to be used by machines.
+As an example, here is an extract of the first few "root nodes" of 'camxes', a famous Lojban PEG (see Chapter \ref{chap:existing-resources-and-tools}
+for more details about it):
 
-As an example, here is an extract of the first few "root nodes" of GRAMMAR NAME: \newline
+\begin{lstlisting}[caption=Extract of 'camxes' - a famous Lojban PEG]
+paragraphs <- paragraph (NIhO-clause+ free* su-clause* paragraphs)?
+paragraph <- (statement / fragment) (I-clause !jek !joik !joik-jek free* (statement / fragment)?)*
+statement <- statement-1 / prenex statement
+statement-1 <- statement-2 (I-clause joik-jek statement-2?)*
+statement-2 <- statement-3 (I-clause (jek / joik)? stag? BO-clause free* statement-2)? / statement-3 (I-clause (jek / joik)? stag? BO-clause free*)?
+statement-3 <- sentence / tag? TUhE-clause free* text-1 TUhU-clause? free*
+fragment <- prenex / terms VAU-clause? free* / ek free* / gihek free* / quantifier / NA-clause !JA-clause free* / relative-clauses / links / linkargs
+prenex <- terms ZOhU-clause free*
+\end{lstlisting}
 
-ADD EXTRACT OF GRAMMAR HERE \newline
+\newpage
+
+Even advanced users of Lojban might struggle to understand all the intricacies at play in just the first few lines, never mind a beginner.\newline
 
 What if there existed a formal grammar which people could read along, while learning Lojban, in order to gather a deeper
 understanding of the language? For any other language, using a formal grammar file as a learning companion would be a very obscure method.
@@ -25,7 +38,7 @@ Of course, improving the reading comprehension of a formal grammar reduces the c
 
 However, as a beginner's tool, such a grammar could really improve the steep learning curve of Lojban, in my opinion.\newline
 
-The next chapter will explore the main reference for Lojban (\cite{cowan1997complete}), in its 2016 revised version, and write a simplified parsing expression grammar (PEG) for a subset of the language.
+The next chapter will explore the main reference for Lojban \footcite{cowan1997complete}, in its 2016 revised version, and write a simplified parsing expression grammar (PEG) for a subset of the language.
 
 % https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_form
 
