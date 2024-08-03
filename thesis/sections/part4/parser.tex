@@ -1,14 +1,68 @@
 \chapter{Parsing sentences: the ``grammar\_parser'' module}
+\label{chap:parser}
 
 \section{Methodology}
 
-\section{Parsing Lojban sentences}
+% https://en.wikipedia.org/wiki/Parse_tree
+
+\newpage
+
+\section{Examples of usage}
+
+This module can be used in two different ways: as a class for short scripts or other modules to use, or as a command-line interface (CLI) tool.
+
+\begin{lstlisting}[caption=Gentufa class being used by a Python script]
+>>> from grammar_parser import Gentufa
+>>> parser = Gentufa()
+>>> parsed_sentence = parser.get_parsed_sentence("mi klama le zarci")
+>>> type(parsed_sentence)
+<class 'parsimonious.nodes.Node'>
+>>> print(parsed_sentence)
+<Node called "SENTENCE" matching "mi klama le zarci EOL">
+    <Node matching "mi klama le zarci ">
+        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "mi ">
+            <Node called "CMAVO_WITH_OR_WITHOUT_MODIFIERS" matching "mi ">
+                <Node called "CMAVO" matching "mi ">
+                    <Node called "KOhA_MI_SERIES" matching "mi ">
+                        <Node called "MI" matching "mi ">
+                            <Node matching "mi">
+                            <RegexNode called "_" matching " ">
+        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "klama ">
+            <Node called "BRIVLA_WITH_OR_WITHOUT_MODIFIERS" matching "klama ">
+                <Node called "BRIVLA" matching "klama ">
+                    <Node called "GISMU" matching "klama ">
+                        <Node matching "klama ">
+                            <Node matching "klama">
+                            <RegexNode called "_" matching " ">
+        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "le zarci ">
+            <Node called "BRIVLA_WITH_OR_WITHOUT_MODIFIERS" matching "le zarci ">
+                <Node called "DESCRIPTION_BRIVLA" matching "le zarci ">
+                    <Node called "SELMAhO_LE" matching "le ">
+                        <Node matching "le">
+                        <RegexNode called "_" matching " ">
+                    <Node called "BRIVLA" matching "zarci ">
+                        <Node called "GISMU" matching "zarci ">
+                            <Node matching "zarci ">
+                                <Node matching "zarci">
+                                <RegexNode called "_" matching " ">
+                    <Node matching "">
+    <Node called "EOL" matching "EOL">
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[caption=Gentufa module being used as a command-line interface tool]
+$ python3 grammar_parser/gentufa.py "mi klama le zarci"
+
+<Node called "SENTENCE" matching "mi klama le zarci EOL">
+    <Node matching "mi klama le zarci ">
+        (...) ---> Same representation as previous example
+    <Node called "EOL" matching "EOL">
+\end{lstlisting}
+
+\section{Breakdown of the module}
 \label{sec:parsing_lojban_sentences}
 
-Described in Subsection \ref{sub:parser}.
-
-(See Appendix \ref{appendix:gentufa-annex} for the corresponding annex)
+The code produced is found at Annex \ref{appendix:gentufa-annex}.
 
 TODO
-
-% https://en.wikipedia.org/wiki/Parse_tree

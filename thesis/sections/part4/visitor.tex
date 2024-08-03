@@ -1,4 +1,5 @@
 \chapter{Breaking down parsed sentences: the ``visitor'' module}
+\label{chap:visitor-module}
 
 \section{Methodology}
 
@@ -11,5 +12,74 @@ because tagging verbs allows us, thanks to their definition, to know which word 
 
 % https://en.wikipedia.org/wiki/Semantic_role_labeling
 
-\section{Content output}
+\newpage
 
+\section{Examples of usage}
+
+This module can be used in two different ways: as a class for short scripts or other modules to use, or as a command-line interface (CLI) tool.
+
+\begin{lstlisting}[caption=GentufaVisitor class being used by a Python script]
+>>> from grammar_parser import Gentufa
+>>> from visitor import GentufaVisitor
+>>> parse_tree = Gentufa().get_parsed_sentence("mi klama le zarci")
+>>> visitor = GentufaVisitor(parse_tree)
+>>> visitor.get_json_output()
+'{"sentence": "mi klama le zarci", "segments": [{"mi": {"definition": "I/me, we/us", "type": "cmavo / KOhA selma\'o (mi series) / pronoun"}}, {"klama": {"definition": "$x_{1}$ comes/goes to destination $x_{2}$ from origin $x_{3}$ via route $x_{4}$ using means/vehicle $x_{5}$.", "glosswords": [{"word": "come", "sense": null}], "type": "gismu", "sumti": ["$x_{1}$", "$x_{2}$", "$x_{3}$", "$x_{4}$", "$x_{5}$"]}}, {"le zarci": {"type": "description brivla", "segments": [{"le": {"definition": "description marker / \'the\'", "type": "cmavo / LE selma\'o"}}, {"zarci": {"definition": "$x_{1}$ is a market/store/exchange/shop(s) selling/trading (for) $x_{2}$, operated by/with participants $x_{3}$.", "glosswords": [{"word": "market", "sense": null}, {"word": "shop", "sense": "store"}], "type": "gismu", "sumti": ["$x_{1}$", "$x_{2}$", "$x_{3}$"]}}]}}]}'
+\end{lstlisting}
+
+\newpage
+
+\begin{lstlisting}[caption=GentufaVisitor module being used as a command-line interface tool]
+$ python3 visitor/gentufa_visitor.py "mi klama le zarci" | jq
+
+{
+  "sentence": "mi klama le zarci",
+  "segments": [
+    {
+      "mi": {
+        "definition": "I/me, we/us",
+        "type": "cmavo / KOhA selma'o (mi series) / pronoun"
+      }
+    },
+    {
+      "klama": {
+        "definition": "$x_{1}$ comes/goes to destination $x_{2}$ from origin $x_{3}$ via route $x_{4}$ using means/vehicle $x_{5}$.",
+        "glosswords": [ {"word": "come", "sense": null} ],
+        "type": "gismu",
+        "sumti": [ "$x_{1}$", "$x_{2}$", "$x_{3}$", "$x_{4}$", "$x_{5}$" ]
+      }
+    },
+    {
+      "le zarci": {
+        "type": "description brivla",
+        "segments": [
+          {
+            "le": {
+              "definition": "description marker / 'the'",
+              "type": "cmavo / LE selma'o"
+            }
+          },
+          {
+            "zarci": {
+              "definition": "$x_{1}$ is a market/store/exchange/shop(s) selling/trading (for) $x_{2}$, operated by/with participants $x_{3}$.",
+              "glosswords": [
+                { "word": "market", "sense": null },
+                { "word": "shop", "sense": "store" }
+              ],
+              "type": "gismu",
+              "sumti": [ "$x_{1}$", "$x_{2}$", "$x_{3}$" ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+\end{lstlisting}
+
+\section{Breakdown of the module}
+\label{sec:visitor-code-breakdown}
+
+The code produced is found at Annex \ref{appendix:gentufa-visitor-annex}.
+
+TODO

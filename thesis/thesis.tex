@@ -35,18 +35,22 @@
 %\input{misc/acknowledgements}
 %\newpage \ \newpage
 
+\pagenumbering{arabic}
+
 % ToC and LoF
-\pagenumbering{roman}
 %\newgeometry{left=2.5cm, top=2cm, bottom=1cm}
 \vspace{-1cm}
 \setcounter{tocdepth}{3}
 \tableofcontents
 \newpage %\ \newpage
 \listoffigures
-\newpage \ \newpage % Blank page after toc/lof
+\newpage %\ \newpage
+\addcontentsline{toc}{chapter}{List of Sample codes/Examples}
+\renewcommand\lstlistlistingname{List of Sample codes/Examples}
+\lstlistoflistings
+\newpage \ \newpage % Blank page after toc/lof/lol
 
 % Thesis sections
-\pagenumbering{arabic}
 \makeatletter
 \@openrightfalse
 \makeatother
@@ -62,17 +66,20 @@
 \label{part:state-of-the-art}
 \input{sections/part2/state_of_the_art}
 \newpage \thispagestyle{empty} \ \newpage
-% Part 3
-\part{Creating an ``educational'' PEG for Lojban}
-\label{part:creating-a-peg}
-\input{sections/part3/introduction}
-\input{sections/part3/peg}
 % Part 4
 \part{Creating a Python-Lojban toolkit}
 \label{part:python-toolkit}
 \input{sections/part4/code_intro}
 \input{sections/part4/dictionary}
 \input{sections/part4/parser}
+\input{sections/part4/testing_parser.tex}
+% Part 3
+\part{Creating an ``educational'' PEG for Lojban}
+\label{part:creating-a-peg}
+\input{sections/part3/introduction}
+\input{sections/part3/peg}
+\part{Visualising parsed sentences}
+\label{part:visitor-and-visualising}
 \input{sections/part4/visitor}
 \input{sections/part4/visualising}
 \newpage \thispagestyle{empty} \ \newpage
