@@ -1,5 +1,35 @@
-\chapter{Closing remarks}
+\chapter{Results and closing remarks}
 
 \vspace{0.5cm}
 
-Closing remarks
+The conjunction of the parser, the visitor, and the PEG created in this thesis currently cover most of the language described in
+\citetitle{cowan1997complete} until chapter 7 (with a few excursions into other chapters). 21 chapters exist in the book,
+but only 17 chapters that address grammar, which means that this thesis achieved to create tools which help students of
+Lojban to understand more than 40\% of the major reference book on the language.
+The final test coverage is as follows: X sentences from Y chapters parsed and visited correctly.\newline
+
+However, it is important to note that Chapter 2 of the reference book gives a very broad tour of the language, so the tools
+developed allow true beginner students to study in depth the most important chapter of all.\newline
+
+Looking back at the aims and objectives set in Chapter \ref{chap:aims-and-objectives}, one must ponder if they were met. Let us
+revisit them and evaluate:
+
+\begin{itemize}
+\item \textbf{State of the Art (Part \ref{part:state-of-the-art})}: A broad overview of the study of constructed languages, and Lojban
+in specific, was created in order to gain deeper understanding on the subject.
+\item \textbf{Creation of a Python-Lojban toolkit (Part \ref{part:python-toolkit})}: Three different tools were created, each
+serving a separate purpose but working in collaboration. These tools allow students, while learning Lojban, to gather word definitions,
+test if the sentences they are writing are correct, and decompose complex sentences they might struggle to understand.
+\item \textbf{Creation of a simplified Lojban PEG (Part \ref{part:creating-a-peg})}: The created grammar is, of course, not complete.
+Several grammar aspects are still missing, it over-simplifies some of the rules, and possibly validates sentences that other parsers wouldn't.
+However, while creating it, I was able to understand Lojban much better than with the few tutorials existing online, which means that this way
+of studying (reference book + companion grammar) does have at least some anecdotal success. The only way to assess the veracity of this point
+would be to convince people to study Lojban and do a parallel study.
+\end{itemize}
+
+The overarching objective was to create a learning companion for students. It is fair to say that at least this humble objective was met,
+and that these tools are a good starting point for continued work in the subject.\newline
+
+Learning a language is never easy, and for one as complex as Lojban this expression is an understatement. As someone who has always been interested
+in (self-)education, I hope that the work accomplished in this thesis, and the future work planned ahead, might help prospective
+learners of Lojban one day.
