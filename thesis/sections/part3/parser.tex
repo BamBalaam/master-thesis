@@ -53,7 +53,7 @@ $ python3 grammar_parser/gentufa.py "mi klama le zarci"
 \begin{lstlisting}[caption=Gentufa class being used by a Python script]
 >>> from grammar_parser import Gentufa
 >>> parser = Gentufa()
->>> parsed_sentence = parser.get_parsed_sentence("mi klama le zarci")
+>>> parsed_sentence = parser.get_parsed_text("mi klama le zarci")
 >>> type(parsed_sentence)
 <class 'parsimonious.nodes.Node'>
 >>> print(parsed_sentence)

@@ -278,3 +278,4 @@ TSWLatexianTemp*
 ### PERSONAL gitignore
 /forms
 /bib_sources
+*.doc
