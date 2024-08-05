@@ -3,9 +3,10 @@
 
 \section{Methodology}
 
-Described in Chapter \ref{chap:existing-resources-and-tools}, La Jbovlaste is the official Lojban dictionary published by the LLG and available online \footcite{jbovlaste}.
+Described in Chapter \ref{chap:existing-resources-and-tools}, La Jbovlaste is the official Lojban dictionary published by the LLG
+and available online \footcite{jbovlaste}.
 This dictionary allows to export the entirety of its data in a XML format at the "XML Export" page \footcite{jbovlaste-export}.
-The format of the XML file is as follows (showing the example of a single word, jbovlaste itself):
+The format of the XML file is as follows (showing the example of a single word, 'jbovlaste' itself):
 
 \begin{lstlisting}[caption=Example of word as defined in the official Lojban dictionary XML export]
 <?xml version="1.0" encoding="UTF-8"?>
@@ -25,16 +26,18 @@ The format of the XML file is as follows (showing the example of a single word, 
 
 In this first module in the Python-Lojban toolkit, a Python class is created in order to parse this XML file and aggregate all words present,
 their type, and their definition. Once that dictionary is instantiated, functions of this class will allow to get word definitions
-(in a raw or "prettified" format for displaying on a terminal) or Python objects used in other modules.
+(in a raw or "prettified" format for displaying on a terminal) or Python objects to be used in other modules.\newline
+
+This tool could be used by Lojban students to quickly access to word definitions, without having to launch a browser just for that simple action.
 
 \section{Breakdown of the code in the module}
 
-The code produced is found at Annex \ref{appendix:jbovlaste-annex}.
+The code produced is found at Annex \ref{appendix:jbovlaste-annex}. You may read it along the following explanations.
 
 \subsection*{README.md file}
 
 Allows users to understand what the module does and how it is used.
-Also includes a citation to where the raw XML file used comes from.
+Also includes a citation to contextualise where the raw XML file that is used comes from.
 
 \subsection*{\_\_init\_\_.py file}
 
@@ -42,20 +45,18 @@ Allows other modules to import the Jbovlaste class without calling the file it i
 
 \subsection*{jbovlaste.py file}
 
-This file defines the Jbovlaste class which, once instantiated, allows to fetch
+This file defines the \textbf{Jbovlaste} class which, once instantiated, allows to fetch
 words in Lojban through helper functions. The structure returned contains the type of word it is,
 a definition, and optional glossary words in the language of the dictionary.
-As of right now, only English is available as a target language but making other
-languages available is fairly trivial (although other languages are not as complete
-in the official "La Jbovlaste").\newline
+As of right now, only English is available as a target language, but making other
+languages available is fairly trivial by exporting other XML files and naming them in a specific
+way so that the class is able to access them (although other languages are not as complete as English
+is in the official "La Jbovlaste").\newline
 
-\newpage
-
-The following list is a brief description of all the
-functions in the class:
+The following list is a brief description of all the functions in the class:
 
 \begin{itemize}
-\item \textbf{\_\_init\_\_}: instantiates the class object by building a dictionary of
+\item \textbf{\_\_init\_\_}: instantiates a \textbf{Jbovlaste} class object by building a dictionary of
 Lojban words stored in a Python "dict" data type:
   \begin{itemize}
     \item opens the XML file and finds all nodes named "valsi" ("word" in Lojban);
@@ -68,8 +69,8 @@ the words.
 \item \textbf{get\_word\_struct}: tries to find a word, given as a parameter of the function,
 in the dictionary; if found, returns an object with all known information about it;
 if not found, returns a KeyError (one of Python's default errors).
-\item \textbf{get\_word\_pretty}: gathers the object returned by get\_word\_struct and returns
-a formatted string with the information contained within to be displayed.
+\item \textbf{get\_word\_pretty}: gathers the object returned by the get\_word\_struct function and returns
+a formatted string with the information contained within to be displayed in a terminal.
 \item \textbf{decompose\_definition} and \textbf{get\_definition\_arguments}: uses a Regular Expression
 in order to extract and list arguments ("sumti") from a definition
 \footnote{See \ref{subsec:brief-intro-to-lojban} for a reminder on the meaning of "sumti"}.
@@ -78,7 +79,8 @@ in order to extract and list arguments ("sumti") from a definition
 Outside of the class, we can find an "if-clause".
 This is the entrypoint of the file if it is executed directly through a terminal.
 In that case, the Jbovlaste class is instantiated and the "get\_word\_pretty" function
-is executed, with whatever word was given as an argument in the call.
+is executed, with whatever word was given as an argument in the call. It returns an explicit
+error message if the word is not found in the dictionary.
 
 \newpage
 

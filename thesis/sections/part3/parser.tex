@@ -3,12 +3,15 @@
 
 \section{Methodology}
 
-% https://en.wikipedia.org/wiki/Parse_tree
+As seen in Chapter \ref{chap:existing-resources-and-tools}, existing parsers online are not very user-friendly. They are either
+over-engineered or written in very outdated technical source-codes. Additionally, the Parse Tree they output is very hard to read,
+even for simple sentences. Our main objective with this module is to create a parser that is both fast and outputs a fairly readable parse tree,
+in order for students to be able to test if their simple sentences are correct or not.
 
 \section{Breakdown of the module}
 \label{sec:parsing_lojban_sentences}
 
-The code produced is found at Annex \ref{appendix:gentufa-annex}.
+The code produced is found at Annex \ref{appendix:gentufa-annex}. You may read it along the following explanations.
 
 \subsection*{README.md file}
 
@@ -25,16 +28,31 @@ We shall ignore this file for now, as it will be discussed in a lot more detail 
 
 \subsection*{gentufa.py file}
 
-This file defines the Gentufa class which, (...).\newline
-
-\newpage
+This file defines the \textbf{Gentufa} class which, once instantiated, allows to parse Lojban sentences through an helper function.
+The parse tree returned is, thanks to Parsimonious \footcite{parsimonious} and the simplified PEG presented later in this thesis,
+very readable.\newline
 
 The following list is a brief description of all the functions in the class:
 
 \begin{itemize}
-\item \textbf{\_\_init\_\_ :}
-\item \textbf{get\_parsed\_sentence:}
+\item \textbf{\_\_init\_\_ :} instantiates a \textbf{Gentufa} class object by doing four simple tasks:
+    \begin{itemize}
+        \item instantiate a \textbf{Jbovlaste} instance to have a dictionary on hand
+        \item open the grammar file and store its text
+        \item augment the grammar text with dictionary words, by finding specific tags in it
+        \item feed that grammar text to the Grammar class from Parsimonious, and keep an instance of it to parse sentences
+    \end{itemize}
+\item \textbf{get\_parsed\_text:} receives some text as an argument and uses the Grammar object stored in the class, instantiated in the
+\_\_init\_\_ function, to parse the text and return a parse tree
 \end{itemize}
+
+Outside of the class, we can find an "if-clause".
+This is the entrypoint of the file if it is executed directly through a terminal.
+In that case, the Gentufa class is instantiated and the "get\_parsed\_text" function
+is executed, with whatever sentence was given as an argument in the call. It returns an explicit
+error message if the sentence does not generate a valid parse tree.
+
+\newpage
 
 \section{Examples of usage}
 
@@ -42,48 +60,43 @@ This module can be used in two different ways: as a command-line interface (CLI)
 from a terminal, or as a class for short scripts or other modules to use.
 
 \begin{lstlisting}[caption=Gentufa module being used as a command-line interface tool]
-$ python3 grammar_parser/gentufa.py "mi klama le zarci"
+$ python3 grammar_parser/gentufa.py "mi tavla do"
 
-<Node called "SENTENCE" matching "mi klama le zarci EOL">
-    <Node matching "mi klama le zarci ">
-        (...) ---> Same representation as the next example
+<Node called "LOJBAN_TEXT" matching "mi tavla do EOL">
+    <Node called "SENTENCE" matching "mi tavla do ">
+        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "mi ">
+            <Node called "CMAVO" matching "mi ">
+                <Node called "SELMAhO_KOhA" matching "mi ">
+                    <Node called "KOhA_MI_SERIES" matching "mi ">
+                        <Node called "MI" matching "mi ">
+                            <Node matching "mi">
+                            <RegexNode called "_" matching " ">
+        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "tavla ">
+            <Node called "TANRU_OR_BRIVLA" matching "tavla ">
+                <Node called "BRIVLA" matching "tavla ">
+                    <Node called "GISMU" matching "tavla ">
+                        <Node matching "tavla ">
+                            <Node matching "tavla">
+                            <RegexNode called "_" matching " ">
+        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "do ">
+            <Node called "CMAVO" matching "do ">
+                <Node called "SELMAhO_KOhA" matching "do ">
+                    <Node called "KOhA_MI_SERIES" matching "do ">
+                        <Node called "DO" matching "do ">
+                            <Node matching "do">
+                            <RegexNode called "_" matching " ">
+    <Node matching "">
     <Node called "EOL" matching "EOL">
 \end{lstlisting}
 
 \begin{lstlisting}[caption=Gentufa class being used by a Python script]
 >>> from grammar_parser import Gentufa
 >>> parser = Gentufa()
->>> parsed_sentence = parser.get_parsed_text("mi klama le zarci")
->>> type(parsed_sentence)
+>>> parsed_text = parser.get_parsed_text("mi tavla do")
+>>> type(parsed_text)
 <class 'parsimonious.nodes.Node'>
->>> print(parsed_sentence)
-<Node called "SENTENCE" matching "mi klama le zarci EOL">
-    <Node matching "mi klama le zarci ">
-        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "mi ">
-            <Node called "CMAVO_WITH_OR_WITHOUT_MODIFIERS" matching "mi ">
-                <Node called "CMAVO" matching "mi ">
-                    <Node called "KOhA_MI_SERIES" matching "mi ">
-                        <Node called "MI" matching "mi ">
-                            <Node matching "mi">
-                            <RegexNode called "_" matching " ">
-        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "klama ">
-            <Node called "BRIVLA_WITH_OR_WITHOUT_MODIFIERS" matching "klama ">
-                <Node called "BRIVLA" matching "klama ">
-                    <Node called "GISMU" matching "klama ">
-                        <Node matching "klama ">
-                            <Node matching "klama">
-                            <RegexNode called "_" matching " ">
-        <Node called "LOJBAN_WORDS_OR_EXPRESSIONS" matching "le zarci ">
-            <Node called "BRIVLA_WITH_OR_WITHOUT_MODIFIERS" matching "le zarci ">
-                <Node called "DESCRIPTION_BRIVLA" matching "le zarci ">
-                    <Node called "SELMAhO_LE" matching "le ">
-                        <Node matching "le">
-                        <RegexNode called "_" matching " ">
-                    <Node called "BRIVLA" matching "zarci ">
-                        <Node called "GISMU" matching "zarci ">
-                            <Node matching "zarci ">
-                                <Node matching "zarci">
-                                <RegexNode called "_" matching " ">
-                    <Node matching "">
+>>> print(parsed_text)
+<Node called "SENTENCE" matching "mi tavla do EOL">
+    (...) ---> Same representation as the previous example
     <Node called "EOL" matching "EOL">
 \end{lstlisting}

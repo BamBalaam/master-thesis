@@ -3,21 +3,73 @@
 
 \section{Methodology}
 
-Parsimonious has the visitor function. Allows to explore the parse tree generated
+Parsimonious \footcite{parsimonious} has a very interesting feature and API called "visitor". This framework
+allows to explore a Parsimonious parse tree, like the one generated in the previous module, and represent nodes in
+whichever way we want.\newline
 
-What we achieve is a mix of Parts-Of-Speech tagging (giving each word a grammatical category) and Semantic role labeling
+Our approach in this module will be to explore the parse tree and identify important nodes, in order to represent
+their function in the grammar and their definition. All these nodes will be represented as elements in an overarching
+JSON object. The final objective is for the JSON object to be human-readable, in order for students to identify the
+important elements of a Lojban sentence and what they mean (both in definition and in the grammar).\newline
+
+What we achieve is a mix of Parts-Of-Speech tagging (giving each word a grammatical category) and Semantic role labeling,
 because tagging verbs allows us, thanks to their definition, to know which word accomplishes what role in the sentence.
-
-% https://www.geeksforgeeks.org/nlp-part-of-speech-default-tagging/
-
-% https://en.wikipedia.org/wiki/Semantic_role_labeling
 
 \section{Breakdown of the module}
 \label{sec:visitor-code-breakdown}
 
-The code produced is found at Annex \ref{appendix:gentufa-visitor-annex}.
+The code produced is found at Annex \ref{appendix:gentufa-visitor-annex}. You may read it along the following explanations.
 
-TODO
+\subsection*{README.md file}
+
+Allows users to understand what the module does and how it is used.
+
+\subsection*{\_\_init\_\_.py file}
+
+Allows other modules to import the GentufaVisitor class without calling the file it is contained in explicitly.
+
+\subsection*{gentufa\_visitor.py file}
+
+This file defines the \textbf{GentufaVisitor} class which, once instantiated with a parse tree as an argument, allows to
+explore it and returns a human-readable JSON format of the sentence with all nodes annotated. This class is a child of the
+NodeVisitor class from Parsimonious.\newline
+
+The following list is a brief description of all the functions in the class:
+
+\begin{itemize}
+\item \textbf{\_\_init\_\_ :} instantiates a \textbf{GentufaVisitor} class object by doing a few simple tasks
+  \begin{itemize}
+    \item instantiate a \textbf{Jbovlaste} instance to have a dictionary on hand
+    \item creates the base format of the output, with the full text and an empty list of sentences
+    \item runs the parent class function called "visit", giving it the parse tree as an argument, which will execute
+    all the visitor functions we'll dynamically load from other files (see below).
+  \end{itemize}
+\item \textbf{get\_output:} returns the final output after the "visit" function has run
+\item \textbf{get\_json\_output:} same as above, but formatted as a JSON object
+\item \textbf{generic\_visit:} required by the parent class
+\end{itemize}
+
+Outside of the class, we can find an "if-clause" and a decorator function.\newline
+
+The if-clause is the entrypoint of the file if it is executed directly through a terminal.
+In that case, the sentence passed as an argument is given to a Gentufa class instance, in order to
+retrieve a parse tree, and the get\_json\_output function is executed.\newline
+
+The decorator allows to dynamically add a list of functions to a class, in order to avoid overburdening
+its definition and separate class functions into standalone files (instead of having one gigantic class definition).
+
+\subsection*{visitor\_functions folder}
+
+This folder contains all the visitor functions used by GentufaVisitor in order to traverse the parse tree. The files included
+in the folder are the following:
+
+\begin{itemize}
+  \item \textbf{\_\_init\_\_.py :} aggregates all functions from the files below in a list, in order for the decorator described above
+  to add them to the \textbf{GentufaVisitor} class dynamically.
+  \item \textbf{base\_grammar.py:} visitor functions for the basic rules in our grammar
+  \item \textbf{selmaho.py:} visitor functions for the selma'o rules in our grammar (see Part \ref{part:creating-a-peg}
+  to understand what selma'o are)
+\end{itemize}
 
 \newpage
 
@@ -27,48 +79,41 @@ This module can be used in two different ways: as a command-line interface (CLI)
 from a terminal, or as a class for short scripts or other modules to use.
 
 \begin{lstlisting}[caption=GentufaVisitor module being used as a command-line interface tool]
-$ python3 visitor/gentufa_visitor.py "mi klama le zarci" | jq
+$ python3 visitor/gentufa_visitor.py "mi tavla do" | jq
 
 {
-  "sentence": "mi klama le zarci",
-  "segments": [
+  "text": "mi tavla do",
+  "sentences": [
     {
-      "mi": {
-        "definition": "I/me, we/us",
-        "type": "cmavo / KOhA selma'o (mi series) / pronoun"
-      }
-    },
-    {
-      "klama": {
-        "definition": "$x_{1}$ comes/goes to destination $x_{2}$ from origin $x_{3}$ via route $x_{4}$ using means/vehicle $x_{5}$.",
-        "glosswords": [ {"word": "come", "sense": null} ],
-        "type": "gismu",
-        "sumti": [ "$x_{1}$", "$x_{2}$", "$x_{3}$", "$x_{4}$", "$x_{5}$" ]
-      }
-    },
-    {
-      "le zarci": {
-        "type": "description brivla",
-        "segments": [
-          {
-            "le": {
-              "definition": "description marker / 'the'",
-              "type": "cmavo / LE selma'o"
-            }
-          },
-          {
-            "zarci": {
-              "definition": "$x_{1}$ is a market/store/exchange/shop(s) selling/trading (for) $x_{2}$, operated by/with participants $x_{3}$.",
-              "glosswords": [
-                { "word": "market", "sense": null },
-                { "word": "shop", "sense": "store" }
-              ],
-              "type": "gismu",
-              "sumti": [ "$x_{1}$", "$x_{2}$", "$x_{3}$" ]
-            }
+      "sentence": "mi tavla do ",
+      "segments": [
+        {
+          "mi": {
+            "definition": "I/me",
+            "type": "cmavo / selma'o KOhA (mi series) / personal pronouns"
           }
-        ]
-      }
+        },
+        {
+          "tavla": {
+            "definition": "$x_{1}$ talks/speaks to $x_{2}$ about subject $x_{3}$ in language $x_{4}$.",
+            "glosswords": [
+              {
+                "word": "talk", "sense": "any speech"
+              }
+            ],
+            "type": "gismu",
+            "sumti": [
+              "$x_{1}$", "$x_{2}$", "$x_{3}$", "$x_{4}$"
+            ]
+          }
+        },
+        {
+          "do": {
+            "definition": "You",
+            "type": "cmavo / selma'o KOhA (mi series) / personal pronouns"
+          }
+        }
+      ]
     }
   ]
 }
@@ -79,8 +124,8 @@ $ python3 visitor/gentufa_visitor.py "mi klama le zarci" | jq
 \begin{lstlisting}[caption=GentufaVisitor class being used by a Python script]
 >>> from grammar_parser import Gentufa
 >>> from visitor import GentufaVisitor
->>> parse_tree = Gentufa().get_parsed_text("mi klama le zarci")
+>>> parse_tree = Gentufa().get_parsed_text("mi tavla do")
 >>> visitor = GentufaVisitor(parse_tree)
 >>> visitor.get_json_output()
-'{"sentence": "mi klama le zarci", "segments": [{"mi": {"definition": "I/me, we/us", "type": "cmavo / KOhA selma\'o (mi series) / pronoun"}}, {"klama": {"definition": "$x_{1}$ comes/goes to destination $x_{2}$ from origin $x_{3}$ via route $x_{4}$ using means/vehicle $x_{5}$.", "glosswords": [{"word": "come", "sense": null}], "type": "gismu", "sumti": ["$x_{1}$", "$x_{2}$", "$x_{3}$", "$x_{4}$", "$x_{5}$"]}}, {"le zarci": {"type": "description brivla", "segments": [{"le": {"definition": "description marker / \'the\'", "type": "cmavo / LE selma\'o"}}, {"zarci": {"definition": "$x_{1}$ is a market/store/exchange/shop(s) selling/trading (for) $x_{2}$, operated by/with participants $x_{3}$.", "glosswords": [{"word": "market", "sense": null}, {"word": "shop", "sense": "store"}], "type": "gismu", "sumti": ["$x_{1}$", "$x_{2}$", "$x_{3}$"]}}]}}]}'
+'{"text": "mi tavla do", "sentences": [{"sentence": "mi tavla do ", "segments": [{"mi": {"definition": "I/me", "type": "cmavo / selma\'o KOhA (mi series) / personal pronouns"}}, {"tavla": {"definition": "$x_{1}$ talks/speaks to $x_{2}$ about subject $x_{3}$ in language $x_{4}$.", "glosswords": [{"word": "talk", "sense": "any speech"}], "type": "gismu", "sumti": ["$x_{1}$", "$x_{2}$", "$x_{3}$", "$x_{4}$"]}}, {"do": {"definition": "You", "type": "cmavo / selma\'o KOhA (mi series) / personal pronouns"}}]}]}'
 \end{lstlisting}

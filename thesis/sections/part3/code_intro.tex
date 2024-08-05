@@ -15,7 +15,8 @@ this module allows to get definitions for Lojban words, as well as some structur
 a Lojban sentence to check its validity, and returns its Parsing Tree;
 \item The \textbf{"visitor"} module: Described in Chapter \ref{chap:visitor-module}, this module goes through
 a sentence's Parsing Tree and highlights nodes of relevance, in order to tag parts of speech or assign a semantic role
-to words in a sentence, in order to visualise the constituting parts of a sentence and their role in it;
+to words in a sentence, and finally returns a JSON representation of the sentence which helps to visualise
+the constituting parts of the sentence and their role in it;
 \end{itemize}
 
 The following diagram explains how these modules interact with each other:\newline
@@ -27,8 +28,9 @@ The following diagram explains how these modules interact with each other:\newli
 \end{figure}
 
 Additionally a \textbf{"tests"} folder, described in Chapter \ref{chap:creating_a_test_suite}, contains code to
-test the validity of the Parsing Expression Grammar created in Part \ref{part:creating-a-peg} of the thesis, by
-running the grammar\_parser module several times against a big collection of Lojban sentences.\newline
+test the validity of the Parsing Expression Grammar created in Part \ref{part:creating-a-peg} of the thesis, as well
+as the "visitor" module, by running the \textbf{grammar\_parser} and \textbf{visitor} modules several times against a
+sizeable collection of Lojban sentences.\newline
 
 Our main companion through the development of these tools is the Parsimonious Python library \footcite{parsimonious}.
 Although its maintenance is rather sporadic (only one commit so far in 2024, at the time of writing), it was picked because of
@@ -37,9 +39,9 @@ several selling points:
 \begin{itemize}
 \item it is fast;
 \item has an dense set of features (which will be presented in later chapters);
-\item good error reporting
+\item good error reporting which helps debugging more accurately.
 \end{itemize}
 
-One of its main flaws, however, is the lack of proper documentation. A lot of the code is self-documented, but intense
+One of its main flaws, however, is the lack of proper documentation. A lot of the code is self-documented, and intense
 trial and error is required to understand fully how the library's API can be used effectively. But once understood, the
 benefits outweigh the costs, and that is why this library was selected instead of other more famous ones in the Python ecosystem.
