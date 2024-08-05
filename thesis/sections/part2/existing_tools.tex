@@ -1,53 +1,39 @@
 \chapter{Existing resources and tools for Lojban}
 \label{chap:existing-resources-and-tools}
 
-\vspace{0.5cm}
-
-\section*{Grammars}
+\section{Grammars and Parsers}
 \label{section:lojban-grammars}
 
-Camxes
+As mentioned in \ref{subsec:learning-lojban}, Lojban's grammar has gone through several iterations since its initial creation
+due to dissenting opinions about the state of the language and its future.
+A big list of tools and websites exist to parse and represent Lojban sentences with non-official and experimental grammars,
+none of which take a pedagogical standpoint as the simplified one which is created in this thesis, but the following are the most famous ones:
 
-https://mw.lojban.org/papri/camxes
+\subsection*{Camxes}
 
-Java
+Camxes \footcite{camxes} is one of the first unofficial grammars for Lojban. Created in reaction to his opinionated stance about the official
+Lojban Formal Grammar, \citeauthor{camxes}'s stance is that the formal grammar has many flaws, context free grammars are not the right formalism
+for Lojban, and a few aspects of the grammar need to be extended by external scripts in order to work properly.
 
-Camxes.js
+\subsection*{CamxesJS}
 
-http://masatohagiwara.net/camxes.js/
+Camxes.js \footcite{camxesjs} supersedes Camxes as a rewrite in a more modern language than Java, with a few tweaks to the grammar. This version
+will influence many others, such as the next one in the list.
 
-javascript
+\subsection*{zantufa}
 
-La ilmentufa
+Zantufa \footcite{zantufa} is one of the latest parsers that exists, which includes a lot of experimental and unofficial grammar aspects.
 
-https://mw.lojban.org/papri/la\_ilmentufa
-
-
-\section*{Parsers}
-
-Official LLG Parser
-
-https://mw.lojban.org/papri/Official\_LLG\_Parser
-
-C78 source code
-or
-MS-DOS executable
-
-\begin{itemize}
-    \item BPFK Parser: official parser for Lojban maintained by the Logical Language Group (LLG) - implements the official grammar and is intended to be the reference parser for the language.
-    \item jlöi parser
-    \item plise parser
-    \item Lojban Natural Language Toolkit (LONU)
-    \item Zantufa
-    \item lojban-parsing
-    \item https://github.com/lojban/jbofihe/
-\end{itemize}
-
-\section*{Dictionary}
+\section{Dictionary}
 \label{sec:dictionary}
 
-jbovlaste is the Lojban dictionary. \\
+Many Lojban dictionaries exist, almost all of them online though (not many tools like the one we'll create
+in this thesis for browserless use).\newline
 
-la sutysisku, interface for la jbovlaste database with some algorithms improving search relevance. \\
+The three most famous ones are the following:
 
-Lojban Online Dictionary Query. The jbovlaste search engine.\\
+\begin{itemize}
+\item "la jbovlaste" \footcite{jbovlaste}: the de-facto standard Lojban dictionary, collaborative and multilingual;
+\item "la sutysisku" \footcite{sutysisku}: multilingual interface for "la jbovlaste" database with some algorithms improving search relevance;
+\item "la vlasisku" \footcite{vlasisku}: english only, but the interface is way more user-friendly and modern.
+\end{itemize}
