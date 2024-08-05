@@ -1,4 +1,125 @@
 \chapter{Learning Lojban by writing a PEG}
 \label{chap:writing-a-peg}
 
-The simplified Parsing Expression Grammar produced is found at Annex \ref{appendix:peg-annex}
+\section{Methodology}
+
+One of the aims of this thesis (see Chapter \ref{chap:aims-and-objectives}) is to write a Grammar for Lojban sentences which is
+a very simple and good learning companion for Lojban students.
+Thankfully, the Parsimonious \footcite{parsimonious} library uses a simplified format of Extended Backus-Naur form to write
+Parsing Expression Grammars. Its syntax is indeed simple:
+
+\begin{itemize}
+    \item rules have the form rule = literal or conjunction of expressions
+    \item literals are delimited with quotes (e.g. "word")
+    \item regular expressions are valid literals
+    \item alternative expressions are possible, by separating them with "/", and follow the "first match first consume" rule
+    \item "?" delimits that an expression is optional
+    \item "*" delimits that zero or more expressions might match
+    \item "+" delimits that one or more expressions might match
+    \item "\{n,m\}" delimits that n to m repetitions might match
+    \item parenthesis are used for grouping
+\end{itemize}
+
+With these rules in mind, let's explore the creation of a simplified PEG for Lojban.
+
+\newpage
+
+\section{Breakdown of the PEG}
+
+In the following pages, we'll explore the grammar rules written without showing all of the pedagogical contextual comments
+surrounding them. As they are an integral part of the process, we invite the reader to take a look at Annex \ref{appendix:peg-annex}
+for the whole listing of the grammar.
+
+\subsection{Base rules and morphology}
+
+Two small helpers which will be important to avoid parsing issues are added:
+
+\begin{lstlisting}[caption=PEG helpers]
+_ = ~r"\s+"
+EOL = "EOL"
+\end{lstlisting}
+
+The root node - a Lojban text is composed of one or more sentences, separated by the characters ".i" (known as selma'o I), concluded by an End Of Line marker:
+
+\begin{lstlisting}[caption=PEG rules for Lojban text]
+LOJBAN_TEXT = SENTENCE SUBSEQUENT_SENTENCE* EOL
+SUBSEQUENT_SENTENCE = SELMAhO_I SENTENCE
+SELMAhO_I = ".i" _
+\end{lstlisting}
+
+A sentence contains one or more Lojban words or expressions:
+
+\begin{lstlisting}[caption=PEG rules for Lojban sentences]
+SENTENCE = (LOJBAN_WORDS_OR_EXPRESSIONS)+
+\end{lstlisting}
+
+There are 3 basic parts of speech - cmavo, brivla (tanru these are chained) and cmene:
+
+\begin{lstlisting}[caption=PEG rules for basic parts of speech]
+LOJBAN_WORDS_OR_EXPRESSIONS = CMAVO / TANRU_OR_BRIVLA / CMENE
+TANRU_OR_BRIVLA = TANRU / BRIVLA
+TANRU = BRIVLA{2,}
+\end{lstlisting}
+
+Cmavo are the structure words that hold the language together. These are grouped in families called selma'o and
+will be presented in more detail in the next section:
+
+\begin{lstlisting}[caption=CMAVO rule]
+CMAVO = (
+    SELMAhO_ZEI /
+    SELMAhO_BO / SELMAhO_KE / SELMAhO_KEhE / SELMAhO_SE /
+    SELMAhO_LE / SELMAhO_LA / SELMAhO_KU / SELMAhO_LAhE / SELMAhO_LUhU / SELMAhO_COI /
+    SELMAhO_KOhA / SELMAhO_GOhA /
+    SELMAhO_CU / SELMAhO_FA /
+    SELMAhO_VA / SELMAhO_FAhA / SELMAhO_PU / SELMAhO_ZI /
+    SELMAhO_UI /
+    SELMAhO_BY /
+    SELMAhO_BAhE
+)
+\end{lstlisting}
+
+Brivla are predicate words. They are the equivalent of nouns, verbs, adjectives and adverbs and are classified in three families:
+gismu (core words), lujvo (compound words) and fu'ivla (borrowed verbs or loan words).\newline
+
+These are the words which are augmented in the grammar during the parsing process via the dictionary we created
+(see Chapter \ref{chap:parser}). The words surrounded by curly braces are replaced by a long list of literals, separated
+by an alternative delimiter ("/").
+
+\begin{lstlisting}[caption=BRIVLA rule]
+BRIVLA = GISMU / LUJVO / FUhIVLA
+GISMU = {{gismu}}
+LUJVO = {{lujvo}}
+FUhIVLA = {{fu'ivla}}
+\end{lstlisting}
+
+\newpage
+
+Cmene are words used as a name (for things or people). For these, we'll use a Regular Expression in order to follow Lojban's rules:
+
+\begin{lstlisting}[caption=CMENE rule]
+CMENE = (~r"\.?[A-Za-z]+\.?") _
+\end{lstlisting}
+
+\subsection{The many cmavo and selma'o}
+
+Listing all of the cmavo and selma'o added into the grammar would be verbose and annoying for this thesis' readers. However, they are
+one of the main selling points of this grammar since they introduce commentary that helps students understand them. Thus, a few examples will
+be presented in order for the reader to get an idea of how these rules are presented:
+
+\begin{lstlisting}[caption=SELMAhO\_ZEI rule]
+# selma'o ZEI (Section 4.6): join two words to create a lujvo (e.g. "xy. zei kantu" = X-ray)
+ZEI = "zei" _
+SELMAhO_ZEI = (GISMU / FUhIVLA / CMENE) ZEI (GISMU / FUhIVLA / CMENE)
+\end{lstlisting}
+
+\begin{lstlisting}[caption=KOhA\_MI\_SERIES rule]
+# selma'o KOhA: mi-series (Section 7.2): Personal pronouns
+KOhA_MI_SERIES = (MI / MIhO / MIhA / MAhA / DO / DOhO / KO)
+MI = "mi" _     # I/me
+MIhO = "mi'o" _ # You and I
+MIhA = "mi'a" _ # I and others, we but not you
+MAhA = "ma'a" _ # You and I and others
+DO = "do" _     # You
+DOhO = "do'o" _ # You and others
+KO = "ko" _     # You - imperative
+\end{lstlisting}
