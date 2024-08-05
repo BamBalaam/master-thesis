@@ -48,11 +48,11 @@
 \addcontentsline{toc}{chapter}{List of Sample codes/Examples}
 \renewcommand\lstlistlistingname{List of Sample codes/Examples}
 \lstlistoflistings
-\newpage \ \newpage % Blank page after toc/lof/lol
+%\newpage \ \newpage % Blank page after toc/lof/lol
 
 % Thesis sections
 \makeatletter
-\@openrightfalse
+\@openleftfalse
 \makeatother
 \pagestyle{fancy}
 % Part 1
@@ -66,7 +66,7 @@
 \label{part:state-of-the-art}
 \input{sections/part2/existing_research}
 \input{sections/part2/existing_tools}
-\newpage \thispagestyle{empty} \ \newpage
+%\newpage \thispagestyle{empty} \ \newpage
 % Part 3
 \part{Creating a Python-Lojban toolkit}
 \label{part:python-toolkit}
@@ -80,7 +80,7 @@
 \label{part:creating-a-peg}
 \input{sections/part4/introduction}
 \input{sections/part4/peg}
-\newpage \thispagestyle{empty} \ \newpage
+%\newpage \thispagestyle{empty} \ \newpage
 % Part 5
 \part{Conclusion}
 \label{part:conclusion}
@@ -110,9 +110,11 @@
     resetnumbers
 ]
 
+\newpage \thispagestyle{empty} \ \newpage
+
 % Appendices
 \makeatletter
-\@openrightfalse
+\@openleftfalse
 \makeatother
 \pagestyle{empty}
 \part*{Appendices}
